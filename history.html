@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team History — [School Name] Speech & Debate</title>
+  <meta name="description" content="The history of [School Name] Speech & Debate — where we came from and where we're going." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --blue: #007EC6;
+      --blue-dark: #005f96;
+      --blue-deep: #003f66;
+      --gold: #C9A84C;
+      --gold-light: #e8d08a;
+      --white: #ffffff;
+      --off: #f5f7fa;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 60px;
+      background: var(--blue-deep);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-logo { width: 26px; height: 26px; flex-shrink: 0; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--gold); }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: rgba(255,255,255,0.7); }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: var(--blue-deep);
+      padding: 1.5rem 2.5rem;
+      z-index: 99;
+      flex-direction: column;
+      gap: 1.2rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* PAGE HEADER */
+    .page-header {
+      background: var(--blue-deep);
+      padding: 8rem 2.5rem 5rem;
+    }
+    .page-header-inner { max-width: 700px; }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumb a { color: var(--gold); }
+    .breadcrumb a:hover { color: var(--gold-light); }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .page-header h1 em { font-style: italic; color: var(--gold); }
+    .page-header p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+      max-width: 500px;
+      line-height: 1.75;
+    }
+    .header-rule { width: 32px; height: 2px; background: var(--gold); margin: 1.2rem 0 1.5rem; opacity: 0.7; }
+
+    /* SHARED */
+    .section { padding: 5.5rem 2.5rem; }
+    .container { max-width: 860px; margin: 0 auto; }
+    .container-wide { max-width: 1060px; margin: 0 auto; }
+    .eyebrow {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.8rem;
+    }
+    .eyebrow.gold { color: var(--gold); }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    h2.light { color: var(--white); }
+    .rule { width: 32px; height: 2px; background: var(--gold); margin: 1.2rem 0 2rem; opacity: 0.7; }
+
+    /* ORIGIN STORY */
+    #origin { background: var(--off); }
+    .origin-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .origin-body p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 1.2rem;
+    }
+    .origin-body p:last-child { margin-bottom: 0; }
+    .origin-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .sidebar-stat {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      padding: 1.2rem 1.4rem;
+    }
+    .sidebar-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--blue-deep);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .sidebar-stat-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* HISTORY TIMELINE */
+    #history-timeline { background: var(--white); }
+    .h-timeline {
+      position: relative;
+      margin-top: 3.5rem;
+    }
+    .h-timeline::before {
+      content: '';
+      position: absolute;
+      left: 110px;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .h-entry {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 0;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    .h-entry:last-child { margin-bottom: 0; }
+    .h-year {
+      padding-right: 2rem;
+      padding-top: 2px;
+      text-align: right;
+    }
+    .h-year-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--blue-deep);
+    }
+    .h-dot {
+      position: absolute;
+      left: 103px;
+      top: 5px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 3px solid var(--white);
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .h-dot.major {
+      width: 20px;
+      height: 20px;
+      left: 101px;
+      top: 3px;
+      background: var(--blue-deep);
+      box-shadow: 0 0 0 2px var(--blue-deep);
+    }
+    .h-content {
+      padding-left: 2.5rem;
+    }
+    .h-content-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .h-content-body {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 580px;
+    }
+    .h-content-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .h-tag {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 2px;
+      background: var(--off);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .h-tag.gold { background: #fef9c3; color: #854d0e; border-color: #fde68a; }
+    .h-tag.blue { background: #dbeafe; color: #1e40af; border-color: #bfdbfe; }
+    .h-tag.green { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
+
+    /* COACHES / NOTABLE ALUMNI */
+    #people { background: var(--off); }
+    .people-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .people-section-title {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    .person-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .person-item {
+      background: var(--white);
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .person-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .person-detail {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .person-note {
+      font-size: 0.72rem;
+      color: var(--blue);
+      font-weight: 500;
+    }
+
+    /* LOOKING AHEAD */
+    #ahead { background: var(--blue-deep); }
+    .ahead-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .ahead-text h2 { color: var(--white); }
+    .ahead-text p {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    .ahead-goals {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .goal-item {
+      background: var(--blue-deep);
+      padding: 1.3rem 1.6rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: background 0.2s;
+    }
+    .goal-item:hover { background: rgba(255,255,255,0.03); }
+    .goal-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 28px;
+    }
+    .goal-text {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.6;
+    }
+    .goal-sub {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 2px;
+    }
+
+    /* BACK LINK */
+    .back-bar {
+      background: var(--blue-deep);
+      padding: 1.5rem 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .back-bar-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.2); }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .origin-grid,
+      .ahead-inner,
+      .people-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .h-timeline::before { left: 80px; }
+      .h-entry { grid-template-columns: 80px 1fr; }
+      .h-dot { left: 73px; }
+      .h-dot.major { left: 71px; }
+    }
+    @media (max-width: 560px) {
+      .section { padding: 4rem 1.5rem; }
+      nav, .back-bar { padding: 0 1.5rem; }
+      .back-bar { padding: 1.5rem; }
+      .page-header { padding: 7rem 1.5rem 4rem; }
+      .mobile-menu { padding: 1.5rem; }
+      .h-timeline::before { display: none; }
+      .h-entry { grid-template-columns: 1fr; }
+      .h-year { text-align: left; padding-right: 0; margin-bottom: 6px; }
+      .h-dot { display: none; }
+      .h-content { padding-left: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <svg class="nav-logo" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="32" height="32" rx="4" fill="#003f66"/>
+      <g transform="translate(4,4)">
+        <rect x="10" y="1" width="11" height="6" rx="1.5" transform="rotate(45 10 1)" fill="#C9A84C"/>
+        <rect x="1" y="12" width="11" height="5" rx="1.5" transform="rotate(45 1 12)" fill="#C9A84C" opacity="0.7"/>
+        <line x1="6" y1="18" x2="18" y2="6" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
+        <line x1="2" y1="22" x2="7" y2="17" stroke="#C9A84C" stroke-width="3" stroke-linecap="round"/>
+      </g>
+    </svg>
+    [School] <span>Speech & Debate</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#mission">Mission</a></li>
+    <li><a href="index.html#events">Events</a></li>
+    <li><a href="index.html#photos">Photos</a></li>
+    <li><a href="index.html#achievements">Results</a></li>
+    <li><a href="index.html#team">Team</a></li>
+    <li><a href="index.html#schedule">Schedule</a></li>
+    <li><a href="history.html" class="active">History</a></li>
+    <li><a href="index.html#join">Join</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#mission"  onclick="closeNav()">Mission</a>
+  <a href="index.html#events"   onclick="closeNav()">Events</a>
+  <a href="index.html#photos"   onclick="closeNav()">Photos</a>
+  <a href="index.html#achievements" onclick="closeNav()">Results</a>
+  <a href="index.html#team"     onclick="closeNav()">Team</a>
+  <a href="index.html#schedule" onclick="closeNav()">Schedule</a>
+  <a href="history.html"        onclick="closeNav()">History</a>
+  <a href="index.html#join"     onclick="closeNav()">Join</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <span>Team History</span>
+    </div>
+    <h1>Where we <em>came from.</em></h1>
+    <div class="header-rule"></div>
+    <p>Every program has a founding story. This is ours — how [School Name] Speech & Debate was built, who built it, and where it's going.</p>
+  </div>
+</div>
+
+<!-- ORIGIN STORY -->
+<section id="origin" class="section">
+  <div class="container">
+    <div class="origin-grid">
+      <div class="origin-body">
+        <div class="eyebrow">The Beginning</div>
+        <h2>How the program started.</h2>
+        <div class="rule"></div>
+        <p>
+          [School Name] Speech & Debate was founded in [Year] by [Founding member(s) / advisor name]. What began as a small group of students interested in public speaking has grown into a fully competitive program affiliated with the National Speech and Debate Association.
+        </p>
+        <p>
+          In the early years, the program competed in a limited number of tournaments with a small roster. The focus was on building the foundational culture — teaching members how to research, how to argue, and how to carry themselves in competition.
+        </p>
+        <p>
+          [Add your program's real founding story here. Who started it? What was the first tournament? What were the early challenges? This is the narrative that new members will read and feel connected to — make it honest and specific.]
+        </p>
+        <p>
+          Today, the program competes across three formats and has grown to [X] members. The work of every class before this one made that possible.
+        </p>
+      </div>
+      <div class="origin-sidebar">
+        <div class="sidebar-stat">
+          <div class="sidebar-stat-num">[Year]</div>
+          <div class="sidebar-stat-label">Year Founded</div>
+        </div>
+        <div class="sidebar-stat">
+          <div class="sidebar-stat-num">[#]</div>
+          <div class="sidebar-stat-label">Founding Members</div>
+        </div>
+        <div class="sidebar-stat">
+          <div class="sidebar-stat-num">[#]</div>
+          <div class="sidebar-stat-label">Tournaments Competed In Total</div>
+        </div>
+        <div class="sidebar-stat">
+          <div class="sidebar-stat-num">NSDA</div>
+          <div class="sidebar-stat-label">Affiliated Since [Year]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY TIMELINE -->
+<section id="history-timeline" class="section">
+  <div class="container">
+    <div class="eyebrow">Year by Year</div>
+    <h2>Program timeline.</h2>
+    <div class="rule"></div>
+
+    <div class="h-timeline">
+
+      <div class="h-entry">
+        <div class="h-year"><div class="h-year-num">[Year]</div></div>
+        <div class="h-dot major"></div>
+        <div class="h-content">
+          <div class="h-content-title">Program Founded</div>
+          <div class="h-content-body">
+            [School Name] Speech & Debate is established. [Brief description of how/why it started, who was involved, what the first months looked like.]
+          </div>
+          <div class="h-content-tags">
+            <span class="h-tag blue">Founded</span>
+            <span class="h-tag">[# Members]</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-entry">
+        <div class="h-year"><div class="h-year-num">[Year]</div></div>
+        <div class="h-dot"></div>
+        <div class="h-content">
+          <div class="h-content-title">First Tournament</div>
+          <div class="h-content-body">
+            The program competes in its first tournament — [Tournament Name] at [Location]. [Describe what the experience was like, how the team did, what was learned.]
+          </div>
+          <div class="h-content-tags">
+            <span class="h-tag green">Milestone</span>
+            <span class="h-tag">[Tournament Name]</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-entry">
+        <div class="h-year"><div class="h-year-num">[Year]</div></div>
+        <div class="h-dot"></div>
+        <div class="h-content">
+          <div class="h-content-title">First Competitive Placement</div>
+          <div class="h-content-body">
+            [Member Name] earns the program's first competitive placement — [place] in [event] at [tournament]. [A sentence about what that moment meant for the team.]
+          </div>
+          <div class="h-content-tags">
+            <span class="h-tag gold">Achievement</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-entry">
+        <div class="h-year"><div class="h-year-num">[Year]</div></div>
+        <div class="h-dot"></div>
+        <div class="h-content">
+          <div class="h-content-title">Program Growth</div>
+          <div class="h-content-body">
+            Roster expands to [#] members. The program begins competing in [new format/event]. [Describe what changed this year — new leadership, new events, new tournaments, a coach joining, etc.]
+          </div>
+          <div class="h-content-tags">
+            <span class="h-tag blue">Growth</span>
+            <span class="h-tag">[# Members]</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-entry">
+        <div class="h-year"><div class="h-year-num">[Year]</div></div>
+        <div class="h-dot"></div>
+        <div class="h-content">
+          <div class="h-content-title">[Key Milestone Title]</div>
+          <div class="h-content-body">
+            [Describe a significant moment in program history — first regional placement, first NSDA qualification, first speech event, hiring a coach, etc. Replace this with your real milestone.]
+          </div>
+          <div class="h-content-tags">
+            <span class="h-tag green">Milestone</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-entry">
+        <div class="h-year"><div class="h-year-num">[Year]</div></div>
+        <div class="h-dot major"></div>
+        <div class="h-content">
+          <div class="h-content-title">Today</div>
+          <div class="h-content-body">
+            [School Name] Speech & Debate competes across Congressional Debate, Parliamentary Debate, and nine Speech events. The program has [X] active members, attends [X] tournaments per year, and is continuing to grow. The work of rebuilding is underway.
+          </div>
+          <div class="h-content-tags">
+            <span class="h-tag blue">Present</span>
+            <span class="h-tag">[# Members]</span>
+            <span class="h-tag green">NSDA Affiliated</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COACHES & NOTABLE ALUMNI -->
+<section id="people" class="section">
+  <div class="container-wide">
+    <div class="eyebrow">People</div>
+    <h2>Coaches & notable alumni.</h2>
+    <div class="rule"></div>
+    <div class="people-grid">
+      <div>
+        <div class="people-section-title">Coaches & Advisors</div>
+        <div class="person-list">
+          <div class="person-item">
+            <div class="person-name">[Coach Name]</div>
+            <div class="person-detail">Head Coach · [Year] – Present</div>
+            <div class="person-note">[Brief note about their background or impact]</div>
+          </div>
+          <div class="person-item">
+            <div class="person-name">[Advisor Name]</div>
+            <div class="person-detail">Faculty Advisor · [Year] – [Year]</div>
+            <div class="person-note">[Brief note about their role]</div>
+          </div>
+          <div class="person-item">
+            <div class="person-name">[Name]</div>
+            <div class="person-detail">Coach · [Year] – [Year]</div>
+            <div class="person-note">[Brief note]</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="people-section-title">Notable Alumni</div>
+        <div class="person-list">
+          <div class="person-item">
+            <div class="person-name">[Alumni Name]</div>
+            <div class="person-detail">Class of [Year] · [Events competed in]</div>
+            <div class="person-note">[What they achieved or where they went — college, career note, etc.]</div>
+          </div>
+          <div class="person-item">
+            <div class="person-name">[Alumni Name]</div>
+            <div class="person-detail">Class of [Year] · [Events competed in]</div>
+            <div class="person-note">[Achievement or note]</div>
+          </div>
+          <div class="person-item">
+            <div class="person-name">[Alumni Name]</div>
+            <div class="person-detail">Class of [Year] · [Events competed in]</div>
+            <div class="person-note">[Achievement or note]</div>
+          </div>
+          <div class="person-item">
+            <div class="person-name">[Alumni Name]</div>
+            <div class="person-detail">Class of [Year] · [Events competed in]</div>
+            <div class="person-note">[Achievement or note]</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOOKING AHEAD -->
+<section id="ahead" class="section">
+  <div class="container-wide">
+    <div class="ahead-inner">
+      <div class="ahead-text">
+        <div class="eyebrow gold">Looking Ahead</div>
+        <h2 class="light">Where we're going.</h2>
+        <div class="rule"></div>
+        <p>
+          This year's program is building toward something bigger than any single tournament result. The goals below are what we're working toward — as a team, one week at a time.
+        </p>
+        <p>
+          Every member of this year's roster is writing the next chapter of this history. The placements, the milestones, the moments — they start now.
+        </p>
+      </div>
+      <div class="ahead-goals">
+        <div class="goal-item">
+          <div class="goal-num">01</div>
+          <div>
+            <div class="goal-text">Establish a speech program</div>
+            <div class="goal-sub">From zero to competing in all nine individual speech events</div>
+          </div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-num">02</div>
+          <div>
+            <div class="goal-text">Compete in 10+ tournaments</div>
+            <div class="goal-sub">More reps, more rounds, more results than any previous year</div>
+          </div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-num">03</div>
+          <div>
+            <div class="goal-text">Qualify for regionals</div>
+            <div class="goal-sub">Put members on the regional stage for the first time</div>
+          </div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-num">04</div>
+          <div>
+            <div class="goal-text">Grow to 20+ active members</div>
+            <div class="goal-sub">Build a roster that can sustain and outlast any single class</div>
+          </div>
+        </div>
+        <div class="goal-item">
+          <div class="goal-num">05</div>
+          <div>
+            <div class="goal-text">Build a program that lasts</div>
+            <div class="goal-sub">Handbooks, culture, tradition — infrastructure for the years ahead</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BACK BAR / FOOTER -->
+<div class="back-bar">
+  <div class="back-bar-inner">
+    <a href="index.html" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Back to main site
+    </a>
+    <div class="footer-copy">&copy; <span id="yr"></span> [School Name] Speech & Debate</div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  function toggleNav() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeNav() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobileMenu');
+    const toggle = document.querySelector('.nav-toggle');
+    if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+</script>
+
+</body>
+</html>

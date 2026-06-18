@@ -1,0 +1,864 @@
+bash
+
+cat > /mnt/user-data/outputs/debate-website/index.html 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prospect Speech & Debate</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta name="description" content="[School Name] Speech & Debate — competing at the highest level." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --blue: #007EC6;
+      --blue-dark: #005f96;
+      --blue-deep: #003f66;
+      --gold: #C9A84C;
+      --gold-light: #e8d08a;
+      --white: #ffffff;
+      --off: #f5f7fa;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 60px;
+      background: var(--blue-deep);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+    }
+
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.01em;
+    }
+    .nav-brand span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: rgba(255,255,255,0.7);
+      transition: all 0.25s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: var(--blue-deep);
+      padding: 1.5rem 2.5rem;
+      z-index: 99;
+      flex-direction: column;
+      gap: 1.2rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--blue-deep);
+      display: flex;
+      align-items: center;
+      padding: 6rem 2.5rem 4rem;
+    }
+    .hero-inner {
+      max-width: 640px;
+    }
+    .hero-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+      max-width: 440px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+    .hero-line {
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 2rem;
+      opacity: 0.7;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--blue-deep);
+    }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* SECTIONS */
+    section { scroll-margin-top: 60px; }
+
+    .section { padding: 6rem 2.5rem; }
+    .section-sm { padding: 4.5rem 2.5rem; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .container-wide { max-width: 1060px; margin: 0 auto; }
+
+    .eyebrow {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .eyebrow.dark { color: var(--blue); }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text);
+    }
+    h2.light { color: var(--white); }
+
+    .rule {
+      width: 32px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.2rem 0 1.8rem;
+      opacity: 0.7;
+    }
+
+    /* ABOUT */
+    #about { background: var(--off); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-body {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+    .about-body + .about-body { margin-top: 1rem; }
+    .about-facts {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .fact {
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .fact:last-child { border-bottom: none; padding-bottom: 0; }
+    .fact-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--blue);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .fact-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* EVENTS */
+    #events { background: var(--white); }
+    .events-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    .event-item {
+      background: var(--white);
+      padding: 1.6rem 1.8rem;
+      transition: background 0.2s;
+    }
+    .event-item:hover { background: var(--off); }
+    .event-cat {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+    .event-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .event-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ACHIEVEMENTS */
+    #achievements { background: var(--blue-deep); }
+    #achievements .eyebrow { color: var(--gold); }
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+      margin-top: 3rem;
+    }
+    .ach-item {
+      background: var(--blue-deep);
+      padding: 2rem 1.8rem;
+      transition: background 0.2s;
+    }
+    .ach-item:hover { background: rgba(255,255,255,0.03); }
+    .ach-place {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .ach-event {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .ach-tournament {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 12px;
+    }
+    .ach-who {
+      font-size: 0.72rem;
+      color: var(--gold);
+      font-weight: 500;
+      padding-top: 12px;
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+
+    /* TEAM */
+    #team { background: var(--off); }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    .member {
+      background: var(--off);
+      padding: 1.5rem 1.8rem;
+    }
+    .member-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .member-role {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 4px;
+    }
+    .member-events {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* SCHEDULE */
+    #schedule { background: var(--white); }
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 3rem;
+      font-size: 0.85rem;
+    }
+    .schedule-table th {
+      text-align: left;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 1.2rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .schedule-table th:first-child { padding-left: 0; }
+    .schedule-table td {
+      padding: 1rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: middle;
+    }
+    .schedule-table td:first-child { padding-left: 0; }
+    .schedule-table tr:last-child td { border-bottom: none; }
+    .schedule-table tr:hover td { background: var(--off); }
+    .sched-date {
+      font-weight: 500;
+      white-space: nowrap;
+      color: var(--text);
+    }
+    .sched-name { font-weight: 500; }
+    .sched-loc { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+    .badge {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 2px;
+    }
+    .badge-b { background: #dbeafe; color: #1e40af; }
+    .badge-g { background: #dcfce7; color: #166534; }
+    .badge-gold { background: #fef9c3; color: #854d0e; }
+    .badge-r { background: #fee2e2; color: #991b1b; }
+
+    /* JOIN */
+    #join { background: var(--blue); }
+    .join-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .join-text h2 { color: var(--white); }
+    .join-text p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.55);
+      font-weight: 300;
+      margin-top: 0.8rem;
+      max-width: 380px;
+      line-height: 1.75;
+    }
+    .join-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+    .btn-white {
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.7);
+    }
+    .btn-white:hover {
+      border-color: rgba(255,255,255,0.7);
+      color: var(--white);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--blue-deep);
+      padding: 2.5rem 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-brand span { color: var(--gold); }
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .events-list { grid-template-columns: repeat(2, 1fr); }
+      .achievements-grid { grid-template-columns: repeat(2, 1fr); }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .join-inner { flex-direction: column; align-items: flex-start; }
+      .schedule-table th:nth-child(3),
+      .schedule-table td:nth-child(3) { display: none; }
+    }
+    @media (max-width: 560px) {
+      .events-list { grid-template-columns: 1fr; }
+      .achievements-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .section { padding: 4rem 1.5rem; }
+      nav { padding: 0 1.5rem; }
+      .mobile-menu { padding: 1.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Prospect <span>Speech & Debate</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#achievements">Results</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#join">Join</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about"        onclick="closeNav()">About</a>
+  <a href="#events"       onclick="closeNav()">Events</a>
+  <a href="#achievements" onclick="closeNav()">Results</a>
+  <a href="#team"         onclick="closeNav()">Team</a>
+  <a href="#schedule"     onclick="closeNav()">Schedule</a>
+  <a href="#join"         onclick="closeNav()">Join</a>
+</div>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Prospect· NSDA Member</div>
+    <h1>Where<br/>arguments<br/>become <em>wins.</em></h1>
+    <div class="hero-line"></div>
+    <p>We compete in Parliamentary Debate, and 5 individual Speech events. No experience required to join.</p>
+    <div class="hero-actions">
+      <a href="#join" class="btn btn-gold">Join the team</a>
+      <a href="#achievements" class="btn btn-outline">Our results</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="eyebrow dark">About</div>
+        <h2>A program built on preparation and presence.</h2>
+        <div class="rule"></div>
+        <p class="about-body">
+          Prospect Speech & Debate trains students to research, argue, and speak with precision. We compete locally, regionally, and at national tournaments through the National Speech and Debate Association.
+        </p>
+        <p class="about-body">
+          Whether you've never given a speech or you've competed before, this program meets you where you are and pushes you further than you expected.
+        </p>
+      </div>
+      <div class="about-facts">
+        <div class="fact">
+          <div class="fact-num">3</div>
+          <div class="fact-label">Competitive Formats</div>
+        </div>
+        <div class="fact">
+          <div class="fact-num">9</div>
+          <div class="fact-label">Individual Events</div>
+        </div>
+        <div class="fact">
+          <div class="fact-num">10+</div>
+          <div class="fact-label">Tournaments This Year</div>
+        </div>
+        <div class="fact">
+          <div class="fact-num">NSDA</div>
+          <div class="fact-label">Nationally Affiliated</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events" class="section">
+  <div class="container-wide">
+    <div class="eyebrow dark">What We Compete In</div>
+    <h2>Three formats. Nine events.</h2>
+    <div class="events-list">
+
+      <div class="event-item">
+        <div class="event-cat">Debate</div>
+        <div class="event-name">Parliamentary Debate</div>
+        <div class="event-desc">Fast-paced team debate. Topic released 20 minutes before the round. Pure argumentation under pressure.</div>
+      </div>
+      <div class="event-item">
+        <div class="event-cat">Speech</div>
+        <div class="event-name">Original Oratory</div>
+        <div class="event-desc">A fully written, memorized persuasive speech on any topic of your choosing.</div>
+      </div>
+      <div class="event-item">
+        <div class="event-cat">Speech</div>
+        <div class="event-name">Dramatic Interpretation</div>
+        <div class="event-desc">A solo performance cut from published literature — no props, just physicality and voice.</div>
+      </div>
+      <div class="event-item">
+        <div class="event-cat">Speech</div>
+        <div class="event-name">Extemporaneous Speaking</div>
+        <div class="event-desc">Draw a current events question. Thirty minutes to prep. Seven minutes to deliver.</div>
+      </div>
+      <div class="event-item">
+        <div class="event-cat">Speech</div>
+        <div class="event-name">Impromptu Speaking</div>
+        <div class="event-desc">A prompt. Two minutes of prep. Five minutes of speech. The most instinct-driven event in the format.</div>
+      </div>
+      <div class="event-item">
+     
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="section">
+  <div class="container-wide">
+    <div class="eyebrow">Results</div>
+    <h2 class="light">Where we've placed.</h2>
+    <div class="achievements-grid">
+      <div class="ach-item">
+        <div class="ach-place">1st</div>
+        <div class="ach-event">Congressional Debate — Best Legislator</div>
+        <div class="ach-tournament">[Tournament Name] · [Month Year]</div>
+        <div class="ach-who">[Member Name]</div>
+      </div>
+      <div class="ach-item">
+        <div class="ach-place">2nd</div>
+        <div class="ach-event">Original Oratory</div>
+        <div class="ach-tournament">[Tournament Name] · [Month Year]</div>
+        <div class="ach-who">[Member Name]</div>
+      </div>
+      <div class="ach-item">
+        <div class="ach-place">3rd</div>
+        <div class="ach-event">Parliamentary Debate</div>
+        <div class="ach-tournament">[Tournament Name] · [Month Year]</div>
+        <div class="ach-who">[Member Name] & [Member Name]</div>
+      </div>
+      <div class="ach-item">
+        <div class="ach-place">Finals</div>
+        <div class="ach-event">Dramatic Interpretation</div>
+        <div class="ach-tournament">[Tournament Name] · [Month Year]</div>
+        <div class="ach-who">[Member Name]</div>
+      </div>
+      <div class="ach-item">
+        <div class="ach-place">1st</div>
+        <div class="ach-event">Extemporaneous Speaking</div>
+        <div class="ach-tournament">[Tournament Name] · [Month Year]</div>
+        <div class="ach-who">[Member Name]</div>
+      </div>
+      <div class="ach-item">
+        <div class="ach-place">2nd</div>
+        <div class="ach-event">Humorous Interpretation</div>
+        <div class="ach-tournament">[Tournament Name] · [Month Year]</div>
+        <div class="ach-who">[Member Name]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="section">
+  <div class="container-wide">
+    <div class="eyebrow dark">The Roster</div>
+    <h2>Leadership</h2>
+    <div class="team-grid">
+      <div class="member">
+        <div class="member-role">President</div>
+        <div class="member-name">[Name]</div>
+        <div class="member-events">Congress · Original Oratory</div>
+      </div>
+      <div class="member">
+        <div class="member-role">Vice President</div>
+        <div class="member-name">[Name]</div>
+        <div class="member-events">DI · HI · Duo</div>
+      </div>
+      <div class="member">
+        <div class="member-role">Treasurer</div>
+        <div class="member-name">[Name]</div>
+        <div class="member-events">Congress · Parli</div>
+      </div>
+      <div class="member">
+        <div class="member-role">Secretary</div>
+        <div class="member-name">[Name]</div>
+        <div class="member-events">Extemp · Impromptu</div>
+      </div>
+     
+      <div class="member">
+        <div class="member-role">Varsity Parli Captain</div>
+        <div class="member-name">[Name]</div>
+        <div class="member-events">OO · Parli</div>
+      </div>
+      <div class="member">
+        <div class="member-role">Speech Captain</div>
+        <div class="member-name">[Name]</div>
+        <div class="member-events">HI · Duo</div>
+      </div>
+      <div class="member">
+        <div class="member-role">JV Parli Captain</div>
+        <div class="member-name">[Name]</div>
+        <div class="member-events">Congress · Extemp</div>
+      </div>
+      <div class="member">
+        <div class="member-role">JV Parli Captain</div>
+        <div class="member-name">[Name]</div>
+        <div class="member-events">DI · Impromptu</div>
+      </div>
+      <div class="member">
+        <div class="member-role">Media</div>
+        <div class="member-name">[Name]</div>
+        <div class="member-events">Parli · INFO</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule" class="section">
+  <div class="container-wide">
+    <div class="eyebrow dark">This Season</div>
+    <h2>Tournament Schedule</h2>
+    <table class="schedule-table" aria-label="Tournament schedule">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Tournament</th>
+          <th>Location</th>
+          <th>Format</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="sched-date">Sep 14</div></td>
+          <td><div class="sched-name">[Tournament Name]</div></td>
+          <td><div class="sched-loc">[City, State]</div></td>
+          <td><span class="badge badge-gold">Speech</span></td>
+        </tr>
+        <tr>
+          <td><div class="sched-date">Oct 5–6</div></td>
+          <td><div class="sched-name">[Tournament Name]</div></td>
+          <td><div class="sched-loc">[City, State]</div></td>
+          <td><span class="badge badge-b">Congress</span></td>
+        </tr>
+        <tr>
+          <td><div class="sched-date">Oct 19</div></td>
+          <td><div class="sched-name">[Tournament Name]</div></td>
+          <td><div class="sched-loc">[City, State]</div></td>
+          <td><span class="badge badge-g">Parli</span></td>
+        </tr>
+        <tr>
+          <td><div class="sched-date">Nov 9</div></td>
+          <td><div class="sched-name">[Tournament Name]</div></td>
+          <td><div class="sched-loc">[City, State]</div></td>
+          <td><span class="badge badge-gold">Speech</span></td>
+        </tr>
+        <tr>
+          <td><div class="sched-date">Dec 7</div></td>
+          <td><div class="sched-name">[Tournament Name]</div></td>
+          <td><div class="sched-loc">[City, State]</div></td>
+          <td><span class="badge badge-r">Invitational</span></td>
+        </tr>
+        <tr>
+          <td><div class="sched-date">Jan 18</div></td>
+          <td><div class="sched-name">[Tournament Name]</div></td>
+          <td><div class="sched-loc">[City, State]</div></td>
+          <td><span class="badge badge-b">Congress</span></td>
+        </tr>
+        <tr>
+          <td><div class="sched-date">Feb 22</div></td>
+          <td><div class="sched-name">[Regional Championship]</div></td>
+          <td><div class="sched-loc">[City, State]</div></td>
+          <td><span class="badge badge-r">Regional</span></td>
+        </tr>
+        <tr>
+          <td><div class="sched-date">Mar 15</div></td>
+          <td><div class="sched-name">[State Qualifier]</div></td>
+          <td><div class="sched-loc">[City, State]</div></td>
+          <td><span class="badge badge-r">Qualifier</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section id="join" class="section-sm">
+  <div class="container-wide">
+    <div class="join-inner">
+      <div class="join-text">
+        <h2>Ready to compete?</h2>
+        <p>No experience required. We meet every <strong style="color:rgba(255,255,255,0.75)">[Day]</strong> at <strong style="color:rgba(255,255,255,0.75)">[Time]</strong> in <strong style="color:rgba(255,255,255,0.75)">[Room]</strong>. Come to a meeting.</p>
+      </div>
+      <div class="join-actions">
+        <a href="https://docs.google.com/spreadsheets/d/1kLUGqF-avBWPHYwEsxfgV16bZPcZI2qrhWRvbVvEdwY/edit?gid=2100567159#gid=2100567159" class="btn btn-gold">See the schedule</a>
+        <a href="mailto:prospectdebate@gmail.com" class="btn btn-white">Email us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Prospect<span>Speech & Debate</span></div>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#achievements">Results</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+    </ul>
+    <div class="footer-copy">&copy; <span id="yr"></span> Prospect Speech & Debate</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  function toggleNav() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeNav() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobileMenu');
+    const toggle = document.querySelector('.nav-toggle');
+    if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+</script>
+
+</body>
+</html>
