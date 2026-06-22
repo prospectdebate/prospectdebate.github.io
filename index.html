@@ -112,42 +112,170 @@
     }
     .mobile-menu a:hover { color: var(--gold); }
 
-    /* ── HERO ── */
-    .hero {
+   .hero {
       min-height: 100vh;
       background: var(--blue-deep);
       display: flex;
-      align-items: center;
-      padding: 6rem 2.5rem 4rem;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
     }
-    .hero-inner { max-width: 640px; }
+ 
+    .hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 38%, rgba(0,30,51,0.05) 0%, rgba(0,30,51,0.55) 65%, rgba(0,30,51,0.92) 100%),
+        linear-gradient(180deg, rgba(0,30,51,0.35) 0%, transparent 18%, transparent 78%, rgba(0,30,51,0.65) 100%);
+    }
+ 
+    .hero-layout {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 7.5rem 2.5rem 3rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     .hero-label {
       font-size: 0.7rem;
       font-weight: 500;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards;
+      animation-delay: 0.1s;
     }
-    .hero h1 {
+ 
+    .hero-headline {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.6rem, 6vw, 4.2rem);
       font-weight: 700;
       color: var(--white);
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
+      line-height: 0.98;
+      margin-bottom: 1.8rem;
     }
-    .hero h1 em { font-style: italic; color: var(--gold); }
-    .hero-line { width: 40px; height: 2px; background: var(--gold); margin-bottom: 2rem; opacity: 0.7; }
-    .hero p {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.5);
+    .hero-headline .line {
+      display: block;
+      font-size: clamp(3.4rem, 10vw, 7.2rem);
+      letter-spacing: -0.01em;
+      overflow: hidden;
+    }
+    .hero-headline .line > * { display: inline-block; }
+    .line-1, .line-2, .line-3 {
+      opacity: 0;
+      transform: translateY(100%);
+      animation: line-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .line-1 { animation-delay: 0.15s; }
+    .line-2 { animation-delay: 0.32s; color: var(--gold); }
+    .line-3 { animation-delay: 0.49s; }
+    @keyframes line-rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+ 
+    /* Word-cycle on the final line of the headline */
+    .word-cycle {
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+      height: 1em;
+      overflow: hidden;
+      font-style: italic;
+      color: var(--gold);
+      min-width: 3.6ch;
+      text-align: left;
+    }
+    .word-cycle span {
+      position: absolute;
+      left: 0; top: 0;
+      opacity: 0;
+      white-space: nowrap;
+      animation: word-rotate 8s infinite;
+    }
+    .word-cycle span:nth-child(1) { animation-delay: 1.2s; }
+    .word-cycle span:nth-child(2) { animation-delay: 3.2s; }
+    .word-cycle span:nth-child(3) { animation-delay: 5.2s; }
+    .word-cycle span:nth-child(4) { animation-delay: 7.2s; }
+    @keyframes word-rotate {
+      0%   { opacity: 0; transform: translateY(0.3em); }
+      6%   { opacity: 1; transform: translateY(0); }
+      22%  { opacity: 1; transform: translateY(0); }
+      28%  { opacity: 0; transform: translateY(-0.3em); }
+      100% { opacity: 0; }
+    }
+ 
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.55);
       font-weight: 300;
-      max-width: 440px;
+      max-width: 480px;
       line-height: 1.75;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.6rem;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards;
+      animation-delay: 0.7s;
     }
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fade-up 0.8s ease forwards;
+      animation-delay: 0.85s;
+    }
+ 
+    /* Scrolling ticker strip along the bottom edge */
+    .hero-ticker {
+      position: relative;
+      z-index: 2;
+      border-top: 1px solid rgba(201,168,76,0.18);
+      background: rgba(0,20,35,0.55);
+      backdrop-filter: blur(2px);
+      padding: 0.9rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-track {
+      display: inline-flex;
+      gap: 0.9rem;
+      animation: ticker-scroll 38s linear infinite;
+      will-change: transform;
+    }
+    .ticker-track span {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: rgba(201,168,76,0.55);
+      flex-shrink: 0;
+    }
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+ 
     .btn {
       display: inline-block;
       font-size: 0.72rem;
@@ -653,10 +781,11 @@
     }
     .footer-links a:hover { color: var(--gold); }
 
-    /* ── RESPONSIVE ── */
+   /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
       .nav-links { display: none; }
       .nav-toggle { display: flex; }
+      .hero-layout { padding: 6.5rem 1.8rem 2.5rem; }
       .mission-inner,
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .events-list { grid-template-columns: repeat(2, 1fr); }
@@ -679,9 +808,18 @@
       .section { padding: 4rem 1.5rem; }
       nav { padding: 0 1.5rem; }
       .mobile-menu { padding: 1.5rem; }
+      .hero-layout { padding: 6rem 1.5rem 2.2rem; }
+      .ticker-track span { font-size: 0.62rem; }
     }
     @media (prefers-reduced-motion: reduce) {
-      * { transition: none !important; }
+      * { transition: none !important; animation: none !important; }
+      .line-1, .line-2, .line-3,
+      .hero-label, .hero-sub, .hero-actions { opacity: 1 !important; transform: none !important; }
+      .word-cycle span:nth-child(1) { opacity: 1; position: static; }
+      .word-cycle span:nth-child(2),
+      .word-cycle span:nth-child(3),
+      .word-cycle span:nth-child(4) { display: none; }
+      .ticker-track { animation: none; }
     }
   </style>
 </head>
@@ -728,15 +866,46 @@
 </div>
 
 <!-- ── HERO ── -->
+
+<!-- ── HERO ── -->
 <section id="home" class="hero">
-  <div class="hero-inner">
-    <div class="hero-label">Prospect · NSDA Member</div>
-    <h1>Where<br/>arguments<br/>become <em>wins.</em></h1>
-    <div class="hero-line"></div>
-    <p>We compete in Parliamentary Debate and five individual Speech events. No experience required to join.</p>
+  <canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-vignette" aria-hidden="true"></div>
+ 
+  <div class="hero-layout">
+    <div class="hero-label">[School Name] · NSDA Member</div>
+    <h1 class="hero-headline">
+      <span class="line line-1">Where</span>
+      <span class="line line-2">arguments</span>
+      <span class="line line-3">become <em class="word-cycle"><span>wins.</span><span>power.</span><span>change.</span><span>wins.</span></em></span>
+    </h1>
+    <p class="hero-sub">We compete in Congressional Debate, Parliamentary Debate, and nine individual Speech events. No experience required to join.</p>
     <div class="hero-actions">
       <a href="#join" class="btn btn-gold">Join the team</a>
       <a href="#achievements" class="btn btn-outline">Our results</a>
+    </div>
+  </div>
+ 
+  <div class="hero-ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>CONGRESSIONAL DEBATE</span><span>·</span>
+      <span>PARLIAMENTARY DEBATE</span><span>·</span>
+      <span>ORIGINAL ORATORY</span><span>·</span>
+      <span>EXTEMPORANEOUS SPEAKING</span><span>·</span>
+      <span>DRAMATIC INTERPRETATION</span><span>·</span>
+      <span>IMPROMPTU SPEAKING</span><span>·</span>
+      <span>HUMOROUS INTERPRETATION</span><span>·</span>
+      <span>DUO INTERPRETATION</span><span>·</span>
+      <span>INFORMATIVE SPEAKING</span><span>·</span>
+      <span>CONGRESSIONAL DEBATE</span><span>·</span>
+      <span>PARLIAMENTARY DEBATE</span><span>·</span>
+      <span>ORIGINAL ORATORY</span><span>·</span>
+      <span>EXTEMPORANEOUS SPEAKING</span><span>·</span>
+      <span>DRAMATIC INTERPRETATION</span><span>·</span>
+      <span>IMPROMPTU SPEAKING</span><span>·</span>
+      <span>HUMOROUS INTERPRETATION</span><span>·</span>
+      <span>DUO INTERPRETATION</span><span>·</span>
+      <span>INFORMATIVE SPEAKING</span><span>·</span>
     </div>
   </div>
 </section>
@@ -1235,7 +1404,139 @@
       menu.classList.remove('open');
     }
   });
+ 
+  /* ── Hero particle network ──
+     A field of gold nodes drifts slowly and links to nearby neighbors,
+     suggesting connected arguments / a network of ideas. Responds gently
+     to pointer position. Fully paused for reduced-motion users. */
+  (function () {
+    const canvas = document.getElementById('heroCanvas');
+    if (!canvas) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ctx = canvas.getContext('2d');
+    let w, h, dpr;
+    let particles = [];
+    let pointer = { x: null, y: null };
+    let rafId = null;
+ 
+    function resize() {
+      const hero = canvas.parentElement;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = hero.offsetWidth;
+      h = hero.offsetHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      initParticles();
+    }
+ 
+    function initParticles() {
+      const density = w < 700 ? 0.00009 : 0.00014;
+      const count = Math.max(28, Math.min(110, Math.round(w * h * density)));
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        r: Math.random() * 1.6 + 0.6
+      }));
+    }
+ 
+    function step() {
+      ctx.clearRect(0, 0, w, h);
+      const linkDist = w < 700 ? 90 : 130;
+ 
+      // update + draw nodes
+      for (let p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+ 
+        // gentle pull toward pointer
+        if (pointer.x !== null) {
+          const dx = pointer.x - p.x, dy = pointer.y - p.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 160 && dist > 0.1) {
+            p.x += (dx / dist) * 0.12;
+            p.y += (dy / dist) * 0.12;
+          }
+        }
+ 
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(201,168,76,0.55)';
+        ctx.fill();
+      }
+ 
+      // draw links between nearby nodes
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i], b = particles[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < linkDist) {
+            const opacity = (1 - dist / linkDist) * 0.18;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = `rgba(201,168,76,${opacity})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+ 
+      rafId = requestAnimationFrame(step);
+    }
+ 
+    function handlePointerMove(e) {
+      const rect = canvas.getBoundingClientRect();
+      pointer.x = e.clientX - rect.left;
+      pointer.y = e.clientY - rect.top;
+    }
+    function handlePointerLeave() {
+      pointer.x = null;
+      pointer.y = null;
+    }
+ 
+    if (reduceMotion) {
+      // Draw a single static frame, no animation loop, no pointer tracking
+      resize();
+      ctx.clearRect(0, 0, w, h);
+      for (let p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(201,168,76,0.4)';
+        ctx.fill();
+      }
+      window.addEventListener('resize', resize);
+      return;
+    }
+ 
+    resize();
+    step();
+    window.addEventListener('resize', resize);
+    canvas.parentElement.addEventListener('mousemove', handlePointerMove);
+    canvas.parentElement.addEventListener('mouseleave', handlePointerLeave);
+ 
+    // Pause animation when hero leaves viewport (saves battery/CPU)
+    const heroSection = canvas.parentElement;
+    const visObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (!rafId) step();
+        } else {
+          if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        }
+      });
+    }, { threshold: 0 });
+    visObserver.observe(heroSection);
+  })();
 </script>
+ 
 
 </body>
 </html>
