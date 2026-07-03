@@ -571,12 +571,12 @@
       color: var(--blue-dark);
     }
 
-    /* ── ACHIEVEMENTS TIMELINE ── */
+   /* ── ACHIEVEMENTS TIMELINE ── */
     #achievements { background: var(--off); }
     .timeline {
       position: relative;
       margin-top: 3.5rem;
-      padding-left: 2.5rem;
+      padding-left: 2rem;
     }
     .timeline::before {
       content: '';
@@ -587,74 +587,127 @@
       width: 2px;
       background: var(--border);
     }
-    .timeline-year {
-      margin-bottom: 2.5rem;
-    }
-    .timeline-year-label {
+ 
+    /* One block per school year */
+    .tl-year {
       position: relative;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--blue-deep);
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      margin-bottom: 3rem;
     }
-    .timeline-year-label::before {
+    .tl-year:last-child { margin-bottom: 0; }
+ 
+    /* Gold dot on the spine */
+    .tl-year::before {
       content: '';
       position: absolute;
-      left: -2.9rem;
-      width: 14px;
-      height: 14px;
+      left: -2.45rem;
+      top: 6px;
+      width: 13px;
+      height: 13px;
       background: var(--gold);
       border-radius: 50%;
       border: 3px solid var(--off);
       box-shadow: 0 0 0 2px var(--gold);
     }
-    .timeline-entries {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 10px;
+ 
+    .tl-year-header {
+      margin-bottom: 1rem;
     }
-    .timeline-entry {
+    .tl-year-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--blue-deep);
+      line-height: 1.2;
+    }
+ 
+    /* Program-level notes (ranked, hosted event, etc.) */
+    .tl-program-notes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .tl-note {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--blue-dark);
+      background: #dbeafe;
+      border-radius: 2px;
+      padding: 3px 10px;
+      letter-spacing: 0.01em;
+    }
+    .tl-note.hosted {
+      background: var(--gold-pale, #fef9c3);
+      color: #7a5000;
+    }
+ 
+    /* The list of individual results */
+    .tl-results {
       background: var(--white);
       border: 1px solid var(--border);
-      border-left: 3px solid var(--gold);
-      padding: 1.1rem 1.3rem;
-      border-radius: 0 2px 2px 0;
-      transition: box-shadow 0.2s;
+      border-radius: 3px;
+      overflow: hidden;
     }
-    .timeline-entry:hover {
-      box-shadow: 0 4px 16px rgba(0,63,102,0.08);
+    .tl-result {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
     }
-    .entry-place {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--blue);
-      line-height: 1;
-      margin-bottom: 5px;
+    .tl-result:last-child { border-bottom: none; }
+    .tl-result:hover { background: var(--off); }
+ 
+    .tl-result-badge {
+      padding: 0.85rem 0.9rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      border-right: 1px solid var(--border);
+      background: rgba(0,126,198,0.03);
     }
-    .entry-event {
+    .tl-badge-pill {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 7px;
+      border-radius: 2px;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .bp-win    { background: #dcfce7; color: #166534; }
+    .bp-finals { background: #fef9c3; color: #7a5000; }
+    .bp-adv    { background: #dbeafe; color: #1e40af; }
+    .bp-rank   { background: #f3e8ff; color: #6b21a8; }
+    .bp-other  { background: var(--off); color: var(--muted); border: 1px solid var(--border); }
+ 
+    .tl-result-body {
+      padding: 0.85rem 1.1rem;
+    }
+    .tl-result-main {
       font-size: 0.85rem;
       font-weight: 500;
       color: var(--text);
-      margin-bottom: 3px;
+      line-height: 1.45;
     }
-    .entry-tournament {
-      font-size: 0.72rem;
+    .tl-result-who {
+      font-size: 0.73rem;
       color: var(--muted);
-      margin-bottom: 8px;
+      margin-top: 3px;
     }
-    .entry-who {
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: var(--gold);
-      padding-top: 8px;
-      border-top: 1px solid var(--border);
-    }
-
+ 
+    /* Era note (no results, just narrative) */
+    .tl-narrative {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.7;
+      padding: 0.85rem 1.1rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+    }    
     /* ── TEAM ── */
     #team { background: var(--white); }
     .team-grid {
@@ -1192,75 +1245,258 @@
   <div class="container-wide">
     <div class="eyebrow dark">Results</div>
     <h2>Achievements over the years.</h2>
-
+ 
     <div class="timeline">
-
-      <div class="timeline-year">
-        <div class="timeline-year-label">2024 – 2025</div>
-        <div class="timeline-entries">
-          <div class="timeline-entry">
-            <div class="entry-place">1st</div>
-            <div class="entry-event">Congressional Debate — Best Legislator</div>
-            <div class="entry-tournament">[Tournament Name]</div>
-            <div class="entry-who">[Member Name]</div>
+ 
+      <!-- 2013–2014 -->
+      <div class="tl-year">
+        <div class="tl-year-header">
+          <div class="tl-year-label">2013 – 2014</div>
+          <div class="tl-program-notes">
+            <span class="tl-note hosted">Hosted 3rd Annual Georgiana Hays Invitational</span>
           </div>
-          <div class="timeline-entry">
-            <div class="entry-place">2nd</div>
-            <div class="entry-event">Original Oratory</div>
-            <div class="entry-tournament">[Tournament Name]</div>
-            <div class="entry-who">[Member Name]</div>
+        </div>
+        <div class="tl-results">
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-win">1st</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">SCU Philalethic Invitational — Open Parliamentary Debate</div>
+              <div class="tl-result-who">Rohan Grover & Mayank Srivastava</div>
+            </div>
           </div>
-          <div class="timeline-entry">
-            <div class="entry-place">Finals</div>
-            <div class="entry-event">Dramatic Interpretation</div>
-            <div class="entry-tournament">[Tournament Name]</div>
-            <div class="entry-who">[Member Name]</div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-win">1st</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">CLU Invitational — Novice Parliamentary Debate</div>
+              <div class="tl-result-who">Mehak Sharma & Paige Prudhon</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-adv">Finals</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">CLU Invitational — Novice Parliamentary Debate, top seed, undefeated</div>
+              <div class="tl-result-who">Pradyuman Mittal & Ameya Thakur</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-adv">Semis</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">California Lutheran University Invitational — Open Parliamentary Debate</div>
+              <div class="tl-result-who">Mitchell Barraza & Hatim Hafid</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-adv">Qtrs</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">SCU Philalethic Invitational — Novice Parliamentary Debate</div>
+              <div class="tl-result-who">Meera Keskar & Shravan Davuluri</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-adv">Qtrs</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">CLU Invitational — Open Parliamentary Debate, top seed, undefeated</div>
+              <div class="tl-result-who">Mayank Srivastava & Rohan Grover</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-adv">3xOcts</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">Stanford Invitational — Parliamentary Debate</div>
+              <div class="tl-result-who">Mayank Srivastava & Rohan Grover</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-adv">Octs</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">SCU-Dempsey Cronin — Open Parliamentary Debate</div>
+              <div class="tl-result-who">Rohan Grover & Mayank Srivastava</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-rank">Wildcard</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">CFL Winter Debate — State Qualifier Wildcard, undefeated</div>
+              <div class="tl-result-who">Rohan Grover & Mayank Srivastava</div>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="timeline-year">
-        <div class="timeline-year-label">2023 – 2024</div>
-        <div class="timeline-entries">
-          <div class="timeline-entry">
-            <div class="entry-place">3rd</div>
-            <div class="entry-event">Parliamentary Debate</div>
-            <div class="entry-tournament">[Tournament Name]</div>
-            <div class="entry-who">[Member Name] & [Member Name]</div>
+ 
+      <!-- 2012–2013 -->
+      <div class="tl-year">
+        <div class="tl-year-header">
+          <div class="tl-year-label">2012 – 2013</div>
+          <div class="tl-program-notes">
+            <span class="tl-note bp-rank" style="background:#f3e8ff;color:#6b21a8;">Ranked 28th in the Nation by POI</span>
+            <span class="tl-note bp-rank" style="background:#f3e8ff;color:#6b21a8;">Ranked 11th in Region 1</span>
+            <span class="tl-note hosted">Hosted 2nd Annual Georgiana Hays Invitational</span>
           </div>
-          <div class="timeline-entry">
-            <div class="entry-place">1st</div>
-            <div class="entry-event">Extemporaneous Speaking</div>
-            <div class="entry-tournament">[Tournament Name]</div>
-            <div class="entry-who">[Member Name]</div>
+        </div>
+        <div class="tl-results">
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-win">1st</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">SCU Philalethic Invitational — Open Parliamentary Debate</div>
+              <div class="tl-result-who">Krishnan Srinivasan & Aaron Latta</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-rank">Top Speaker</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">Windsor Invitational</div>
+              <div class="tl-result-who">Aaron Latta</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-adv">6th</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">CFL IE — Impromptu Speaking</div>
+              <div class="tl-result-who">Aaron Latta</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-adv">2xOcts</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">Stanford Invitational — Parliamentary Debate</div>
+              <div class="tl-result-who">Krishnan Srinivasan & Aaron Latta</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-adv">Octs</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">SCU Dempsey-Cronin — Open Parliamentary Debate</div>
+              <div class="tl-result-who">Aaron Latta & Krishnan Srinivasan</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-adv">Octs</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">SCU Philalethic — Open Parliamentary Debate, top seed, undefeated</div>
+              <div class="tl-result-who">Rohan Grover & Mayank Srivastava</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-rank">Wildcard</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">CFL Winter Debate — State Qualifier Wildcard, undefeated</div>
+              <div class="tl-result-who">Krishnan Srinivasan & Aaron Latta</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-other">TOC</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">Tournament of Champions — California Cup, 6–6 record</div>
+              <div class="tl-result-who">Aaron Latta & Krishnan Srinivasan</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-other">Alternate</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">CFL State Qualifiers — Parliamentary Debate, distant alternates</div>
+              <div class="tl-result-who">Akshay Chacko & Daniel Chiriaev</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-rank">Ranked</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">24th nationally / 11th in Region 1 — Parliamentary Debate by POI</div>
+              <div class="tl-result-who">Aaron Latta & Krishnan Srinivasan</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-rank">Ranked</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">180th nationally / 49th in Region 1 — Parliamentary Debate by POI</div>
+              <div class="tl-result-who">Mayank Srivastava & Rohan Grover</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-rank">Ranked</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">259th nationally / 74th in Region 1 — Parliamentary Debate by POI</div>
+              <div class="tl-result-who">Daniel Chiriaev & Akshay Chacko</div>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="timeline-year">
-        <div class="timeline-year-label">2022 – 2023</div>
-        <div class="timeline-entries">
-          <div class="timeline-entry">
-            <div class="entry-place">2nd</div>
-            <div class="entry-event">Humorous Interpretation</div>
-            <div class="entry-tournament">[Tournament Name]</div>
-            <div class="entry-who">[Member Name]</div>
+ 
+      <!-- 2011–2012 -->
+      <div class="tl-year">
+        <div class="tl-year-header">
+          <div class="tl-year-label">2011 – 2012</div>
+          <div class="tl-program-notes">
+            <span class="tl-note bp-rank" style="background:#f3e8ff;color:#6b21a8;">Ranked 74th in the Nation by POI</span>
+            <span class="tl-note hosted">Hosted Inaugural Georgiana Hays Invitational</span>
+            <span class="tl-note hosted">Hosted 1st Prospect Debate Invitational</span>
           </div>
-          <div class="timeline-entry">
-            <div class="entry-place">Semis</div>
-            <div class="entry-event">Original Oratory</div>
-            <div class="entry-tournament">[Tournament Name]</div>
-            <div class="entry-who">[Member Name]</div>
+        </div>
+        <div class="tl-results">
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-rank">Top Speaker</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">SCU Dempsey-Cronin — Parliamentary Debate</div>
+              <div class="tl-result-who">Aaron Latta</div>
+            </div>
           </div>
-          <div class="timeline-entry">
-            <div class="entry-place">1st</div>
-            <div class="entry-event">Duo Interpretation</div>
-            <div class="entry-tournament">[Tournament Name]</div>
-            <div class="entry-who">[Member Name] & [Member Name]</div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-adv">Octs</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">SCU Dempsey-Cronin — Open Parliamentary Debate</div>
+              <div class="tl-result-who">Larry Nguyen & Aaron Latta</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-adv">Octs</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">SCU Philalethic Invitational — Parliamentary Debate</div>
+              <div class="tl-result-who">Krishnan Srinivasan & Aaron Latta</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-win">Undefeated</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">CFL Fall Super Debate — JV Parliamentary Debate</div>
+              <div class="tl-result-who">Mayank Srivastava & Ruby Chien</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-adv">6th</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">October CFL Novice — Novice Oratorical Interpretation</div>
+              <div class="tl-result-who">Kanika Gupta</div>
+            </div>
+          </div>
+          <div class="tl-result">
+            <div class="tl-result-badge"><span class="tl-badge-pill bp-adv">6th</span></div>
+            <div class="tl-result-body">
+              <div class="tl-result-main">November CFL IE — Oratorical Interpretation</div>
+              <div class="tl-result-who">Kanika Gupta</div>
+            </div>
           </div>
         </div>
       </div>
-
+ 
+      <!-- 2010–2011 -->
+      <div class="tl-year">
+        <div class="tl-year-header">
+          <div class="tl-year-label">2010 – 2011</div>
+        </div>
+        <div class="tl-narrative">
+          Increased participation, restructuring of the program, and early organizational groundwork. A rebuilding year that set the foundation for the growth that followed.
+        </div>
+      </div>
+ 
+      <!-- ~2010 -->
+      <div class="tl-year">
+        <div class="tl-year-header">
+          <div class="tl-year-label">~ 2010</div>
+        </div>
+        <div class="tl-narrative">
+          Two National Championship appearances under the leadership of Ms. Georgiana Hays — the program's founding era and the standard everything since has been built toward.
+        </div>
+      </div>
+ 
     </div>
   </div>
 </section>
