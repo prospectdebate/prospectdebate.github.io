@@ -741,32 +741,116 @@
     }
     .member-events { font-size: 0.72rem; color: var(--muted); }
 
-    /* ── SCHEDULE ── */
-    #schedule { background: var(--off); }
-    .schedule-table { width: 100%; border-collapse: collapse; margin-top: 3rem; font-size: 0.85rem; }
-    .schedule-table th {
+    /* ── CALENDAR ── */
+    #calendar { background: var(--off); }
+    #calendar { scroll-margin-top: 60px; }
+    .calendar-tools {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) 160px 160px;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 2.6rem;
+      padding-bottom: 1.1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .calendar-search,
+    .calendar-filter {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: var(--white);
+      color: var(--text);
+      font: inherit;
+      font-size: 0.78rem;
+      outline: none;
+    }
+    .calendar-search { padding: 0 0.9rem; }
+    .calendar-filter {
+      appearance: none;
+      padding: 0 2rem 0 0.9rem;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+        linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+      background-position:
+        calc(100% - 16px) 18px,
+        calc(100% - 10px) 18px;
+      background-repeat: no-repeat;
+      background-size: 6px 6px, 6px 6px;
+    }
+    .calendar-search:focus,
+    .calendar-filter:focus {
+      border-color: rgba(0,126,198,0.45);
+      box-shadow: 0 0 0 3px rgba(0,126,198,0.08);
+    }
+    .calendar-table-wrap { overflow-x: auto; }
+    .calendar-table {
+      width: 100%;
+      min-width: 1060px;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.82rem;
+    }
+    .calendar-table th {
       text-align: left;
       font-size: 0.62rem;
       font-weight: 500;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--muted);
-      padding: 0 1.2rem 1rem;
+      padding: 1rem 1.1rem;
       border-bottom: 1px solid var(--border);
+      background: var(--off);
     }
-    .schedule-table th:first-child { padding-left: 0; }
-    .schedule-table td {
-      padding: 1rem 1.2rem;
+    .calendar-table th:first-child { padding-left: 0; }
+    .calendar-table td {
+      padding: 1.2rem 1.1rem;
       border-bottom: 1px solid var(--border);
       color: var(--text);
       vertical-align: middle;
     }
-    .schedule-table td:first-child { padding-left: 0; }
-    .schedule-table tr:last-child td { border-bottom: none; }
-    .schedule-table tr:hover td { background: rgba(0,126,198,0.03); }
-    .sched-date { font-weight: 500; white-space: nowrap; }
-    .sched-name { font-weight: 500; }
-    .sched-loc { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+    .calendar-table td:first-child { padding-left: 0; }
+    .calendar-table tbody tr:last-child td { border-bottom: none; }
+    .calendar-table tbody tr:hover td { background: rgba(0,126,198,0.03); }
+    .cal-date {
+      color: var(--blue-deep);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .cal-name {
+      min-width: 210px;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .cal-detail {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+    }
+    .cal-location,
+    .cal-format,
+    .cal-deadline {
+      white-space: nowrap;
+    }
+    .cal-format,
+    .cal-deadline { font-weight: 500; }
+    .cal-notes {
+      max-width: 270px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      line-height: 1.55;
+    }
+    .cal-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 0.55rem;
+    }
     .badge {
       display: inline-block;
       font-size: 0.6rem;
@@ -780,6 +864,43 @@
     .badge-g  { background: #dcfce7; color: #166534; }
     .badge-gold { background: #fef9c3; color: #854d0e; }
     .badge-r  { background: #fee2e2; color: #991b1b; }
+    .tabroom-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 0.85rem;
+      border: 1px solid rgba(0,63,102,0.18);
+      border-radius: 3px;
+      background: var(--blue-deep);
+      color: var(--white);
+      font-size: 0.64rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .tabroom-link:hover {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: var(--blue-deep);
+    }
+    .tabroom-link-muted,
+    .tabroom-link-muted:hover {
+      border-color: var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: default;
+    }
+    .calendar-empty {
+      display: none;
+      margin-top: 1.2rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-style: italic;
+    }
+    .calendar-empty.show { display: block; }
 
     /* ── JOIN ── */
     #join { background: var(--blue); }
@@ -848,8 +969,7 @@
       .photos-grid { grid-template-columns: repeat(2, 1fr); }
       .photo-slot.large { grid-column: span 2; }
       .join-inner { flex-direction: column; align-items: flex-start; }
-      .schedule-table th:nth-child(3),
-      .schedule-table td:nth-child(3) { display: none; }
+      .calendar-tools { grid-template-columns: 1fr; }
     }
     @media (max-width: 560px) {
       .events-list,
@@ -898,8 +1018,7 @@
     <li><a href="#photos">Photos</a></li>
     <li><a href="#achievements">Results</a></li>
     <li><a href="#team">Team</a></li>
-    <li><a href="#schedule">Schedule</a></li>
-    <li><a href="calendar.html">Calendar</a></li>
+    <li><a href="#calendar">Calendar</a></li>
     <li><a href="history.html">History</a></li>
     <li><a href="#join">Join</a></li>
   </ul>
@@ -914,8 +1033,7 @@
   <a href="#photos"       onclick="closeNav()">Photos</a>
   <a href="#achievements" onclick="closeNav()">Results</a>
   <a href="#team"         onclick="closeNav()">Team</a>
-  <a href="#schedule"     onclick="closeNav()">Schedule</a>
-  <a href="calendar.html" onclick="closeNav()">Calendar</a>
+  <a href="#calendar"     onclick="closeNav()">Calendar</a>
   <a href="history.html"  onclick="closeNav()">History</a>
   <a href="#join"         onclick="closeNav()">Join</a>
 </div>
@@ -1628,71 +1746,365 @@
   </div>
 </section>
 
-<!-- ── SCHEDULE ── -->
-<section id="schedule" class="section">
+<!-- ── CALENDAR ── -->
+<section id="calendar" class="section">
   <div class="container-wide">
     <div class="eyebrow dark">This Season</div>
-    <h2>Tournament Schedule</h2>
-    <table class="schedule-table" aria-label="Tournament schedule">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Tournament</th>
-          <th>Location</th>
-          <th>Format</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><div class="sched-date">Sep 14</div></td>
-          <td><div class="sched-name">[Tournament Name]</div><div class="sched-loc">[City, State]</div></td>
-          <td>[Host School]</td>
-          <td><span class="badge badge-gold">Speech</span></td>
-        </tr>
-        <tr>
-          <td><div class="sched-date">Oct 5–6</div></td>
-          <td><div class="sched-name">[Tournament Name]</div><div class="sched-loc">[City, State]</div></td>
-          <td>[Host School]</td>
-          <td><span class="badge badge-b">Congress</span></td>
-        </tr>
-        <tr>
-          <td><div class="sched-date">Oct 19</div></td>
-          <td><div class="sched-name">[Tournament Name]</div><div class="sched-loc">[City, State]</div></td>
-          <td>[Host School]</td>
-          <td><span class="badge badge-g">Parli</span></td>
-        </tr>
-        <tr>
-          <td><div class="sched-date">Nov 9</div></td>
-          <td><div class="sched-name">[Tournament Name]</div><div class="sched-loc">[City, State]</div></td>
-          <td>[Host School]</td>
-          <td><span class="badge badge-gold">Speech</span></td>
-        </tr>
-        <tr>
-          <td><div class="sched-date">Dec 7</div></td>
-          <td><div class="sched-name">[Tournament Name]</div><div class="sched-loc">[City, State]</div></td>
-          <td>[Host School]</td>
-          <td><span class="badge badge-r">Invitational</span></td>
-        </tr>
-        <tr>
-          <td><div class="sched-date">Jan 18</div></td>
-          <td><div class="sched-name">[Tournament Name]</div><div class="sched-loc">[City, State]</div></td>
-          <td>[Host School]</td>
-          <td><span class="badge badge-b">Congress</span></td>
-        </tr>
-        <tr>
-          <td><div class="sched-date">Feb 22</div></td>
-          <td><div class="sched-name">[Regional Championship]</div><div class="sched-loc">[City, State]</div></td>
-          <td>[Host School]</td>
-          <td><span class="badge badge-r">Regional</span></td>
-        </tr>
-        <tr>
-          <td><div class="sched-date">Mar 15</div></td>
-          <td><div class="sched-name">[State Qualifier]</div><div class="sched-loc">[City, State]</div></td>
-          <td>[Host School]</td>
-          <td><span class="badge badge-r">Qualifier</span></td>
-        </tr>
-      </tbody>
-    </table>
+    <h2>Parliamentary Tournament Calendar</h2>
+    <div class="calendar-tools" aria-label="Tournament filters">
+      <input class="calendar-search" id="calendarSearch" type="search" placeholder="Search tournament or location" aria-label="Search tournament or location">
+      <select class="calendar-filter" id="calendarMonth" aria-label="Filter by month">
+        <option value="">All months</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+        <option>January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>TBA</option>
+      </select>
+      <select class="calendar-filter" id="calendarLocation" aria-label="Filter by location">
+        <option value="">All locations</option>
+        <option value="California">California</option>
+        <option value="Online">Online</option>
+      </select>
+    </div>
+    <div class="calendar-table-wrap">
+      <table class="calendar-table" aria-label="Parliamentary debate tournament calendar">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Tournament</th>
+            <th>City / Location</th>
+            <th>Format</th>
+            <th>Registration Deadline</th>
+            <th>Notes</th>
+            <th>Tabroom</th>
+          </tr>
+        </thead>
+        <tbody id="calendarRows">
+          <tr data-month="August" data-location="Online">
+            <td><div class="cal-date">Aug 30-31, 2025</div></td>
+            <td><div class="cal-name">Harvard College Debating Union Season Opener<span class="cal-detail">Board-approved NPDL tournament</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Listed in NPDL calendar.<div class="cal-badges"><span class="badge badge-gold">Board-Approved</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=35413" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="September" data-location="Online">
+            <td><div class="cal-date">Sep 6-28, 2025</div></td>
+            <td><div class="cal-name">NYPDL September Online Invitational<span class="cal-detail">NYPDL event</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-gold">NYPDL</span><span class="badge badge-b">Online</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=37224" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="September" data-location="California">
+            <td><div class="cal-date">Sep 13-14, 2025</div></td>
+            <td><div class="cal-name">Notre Dame Parli Warmup<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">Notre Dame San Jose, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=36032" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="September" data-location="California">
+            <td><div class="cal-date">Sep 20-22, 2025</div></td>
+            <td><div class="cal-name">Jack Howe Invitational<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">CSU Long Beach, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=33098" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="September" data-location="California">
+            <td><div class="cal-date">Sep 26-28, 2025</div></td>
+            <td><div class="cal-name">Stephen Stewart<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">Milpitas HS, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: Updated.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/fields.mhtml?tourn_id=33088" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="October" data-location="California">
+            <td><div class="cal-date">Oct 4-5, 2025</div></td>
+            <td><div class="cal-name">Cal Parli Invitational<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">UC Berkeley, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: Updated.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/circuit/index.mhtml?circuit_id=107" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="October" data-location="Online">
+            <td><div class="cal-date">Oct 11-12, 2025</div></td>
+            <td><div class="cal-name">NPDL Fall<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: Updated.<div class="cal-badges"><span class="badge badge-gold">NPDL</span><span class="badge badge-b">Online</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/circuit/index.mhtml?circuit_id=179" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="October" data-location="California">
+            <td><div class="cal-date">Oct 17-18, 2025</div></td>
+            <td><div class="cal-name">IW Invitational<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">Washington HS, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: Updated.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/circuit/index.mhtml?circuit_id=107" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="October" data-location="California">
+            <td><div class="cal-date">Oct 18-19, 2025</div></td>
+            <td><div class="cal-name">Bargain Belt Invitational<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">Claremont HS, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=37233" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="October" data-location="California">
+            <td><div class="cal-date">Oct 24, 2025</div></td>
+            <td><div class="cal-name">Jon Schamber Invitational<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">University of The Pacific, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=37257" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="October" data-location="California">
+            <td><div class="cal-date">Oct 24-26, 2025</div></td>
+            <td><div class="cal-name">Jon Schamber High School Invitational<span class="cal-detail">NPDL calendar listing</span></div></td>
+            <td class="cal-location">Stockton, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=37257" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="November" data-location="California">
+            <td><div class="cal-date">Nov 8-9, 2025</div></td>
+            <td><div class="cal-name">NYPDL November California<span class="cal-detail">NYPDL event</span></div></td>
+            <td class="cal-location">Menlo-Atherton, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-gold">NYPDL</span><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=37643" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="November" data-location="California">
+            <td><div class="cal-date">Nov 15-16, 2025</div></td>
+            <td><div class="cal-name">NPDI<span class="cal-detail">National Parliamentary Debate Invitational</span></div></td>
+            <td class="cal-location">UC Berkeley, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: Updated.<div class="cal-badges"><span class="badge badge-gold">Auto</span><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/circuit/index.mhtml?circuit_id=179" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="November" data-location="Online">
+            <td><div class="cal-date">Nov 15-16, 2025</div></td>
+            <td><div class="cal-name">UCLA Invitational<span class="cal-detail">Board-approved NPDL tournament</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-gold">Board-Approved</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=36253" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="November" data-location="Online">
+            <td><div class="cal-date">Nov 21-23, 2025</div></td>
+            <td><div class="cal-name">John Lewis SVUDL Invitational<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-b">Online</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=36551" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="November" data-location="Online">
+            <td><div class="cal-date">Nov 22-23, 2025</div></td>
+            <td><div class="cal-name">NYPDL November Online Invitational<span class="cal-detail">NYPDL event</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-gold">NYPDL</span><span class="badge badge-b">Online</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=37985" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="December" data-location="California">
+            <td><div class="cal-date">Dec 5-7, 2025</div></td>
+            <td><div class="cal-name">La Costa Canyon Winter Classic<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">La Costa Canyon HS, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="http://tabroom.com/index/tourn/index.mhtml?tourn_id=37298" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="January" data-location="California">
+            <td><div class="cal-date">Jan 10-11, 2026</div></td>
+            <td><div class="cal-name">Nueva Invitational<span class="cal-detail">NPDL calendar listing</span></div></td>
+            <td class="cal-location">Nueva, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=38067" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="January" data-location="California">
+            <td><div class="cal-date">Jan 17-19, 2026</div></td>
+            <td><div class="cal-name">James Logan Martin Luther King Jr.<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">James Logan HS, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: Updated.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/past.mhtml?webname=mlk" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="January" data-location="Online">
+            <td><div class="cal-date">Jan 31, 2026</div></td>
+            <td><div class="cal-name">Berkeley International Parliamentary Debate Invitational<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: Updated.<div class="cal-badges"><span class="badge badge-b">Online</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/search.mhtml?search=berkeley" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="February" data-location="Online">
+            <td><div class="cal-date">Feb 7-9, 2026</div></td>
+            <td><div class="cal-name">Stanford Invitational<span class="cal-detail">Board-approved NPDL tournament</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: Updated.<div class="cal-badges"><span class="badge badge-gold">Board-Approved</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/circuit/index.mhtml?circuit_id=179" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="February" data-location="Online">
+            <td><div class="cal-date">Feb 14-16, 2026</div></td>
+            <td><div class="cal-name">Cal Invitational UC Berkeley<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: Updated.<div class="cal-badges"><span class="badge badge-b">Online</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/search.mhtml?search=berkeley" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="February" data-location="California">
+            <td><div class="cal-date">Feb 14-15, 2026</div></td>
+            <td><div class="cal-name">Regent Legacy Cal Lutheran<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">Cal Lutheran, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: Updated.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/circuit/index.mhtml?circuit_id=107" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="February" data-location="California">
+            <td><div class="cal-date">Feb 21-22, 2026</div></td>
+            <td><div class="cal-name">Evergreen Invitational<span class="cal-detail">NPDL calendar listing</span></div></td>
+            <td class="cal-location">Evergreen Valley, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=37110" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="February" data-location="Online">
+            <td><div class="cal-date">Feb 21-22, 2026</div></td>
+            <td><div class="cal-name">SVUDL Ryan Mills Memorial Invitational<span class="cal-detail">Auto-approved</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-b">Online</span></div></td>
+            <td><a class="tabroom-link" href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=36724" target="_blank" rel="noopener">Open Tabroom</a></td>
+          </tr>
+          <tr data-month="TBA" data-location="Online">
+            <td><div class="cal-date">TBA</div></td>
+            <td><div class="cal-name">Brown University Parliamentary Debate Tournament<span class="cal-detail">NPDL calendar listing</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-b">Online</span></div></td>
+            <td><span class="tabroom-link tabroom-link-muted">TBA</span></td>
+          </tr>
+          <tr data-month="TBA" data-location="California">
+            <td><div class="cal-date">TBA</div></td>
+            <td><div class="cal-name">Claremont Wolfpack<span class="cal-detail">NPDL calendar listing</span></div></td>
+            <td class="cal-location">Claremont HS, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><span class="tabroom-link tabroom-link-muted">TBA</span></td>
+          </tr>
+          <tr data-month="TBA" data-location="California">
+            <td><div class="cal-date">TBA</div></td>
+            <td><div class="cal-name">El Cerrito Berman<span class="cal-detail">NPDL calendar listing</span></div></td>
+            <td class="cal-location">El Cerrito HS, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-b">California</span></div></td>
+            <td><span class="tabroom-link tabroom-link-muted">TBA</span></td>
+          </tr>
+          <tr data-month="TBA" data-location="Online">
+            <td><div class="cal-date">TBA</div></td>
+            <td><div class="cal-name">NPDL Spring<span class="cal-detail">NPDL calendar listing</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-gold">NPDL</span><span class="badge badge-b">Online</span></div></td>
+            <td><span class="tabroom-link tabroom-link-muted">TBA</span></td>
+          </tr>
+          <tr data-month="TBA" data-location="Online">
+            <td><div class="cal-date">TBA</div></td>
+            <td><div class="cal-name">NYPDL Championships<span class="cal-detail">NYPDL event</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-gold">NYPDL</span><span class="badge badge-b">Online</span></div></td>
+            <td><span class="tabroom-link tabroom-link-muted">TBA</span></td>
+          </tr>
+          <tr data-month="TBA" data-location="Online">
+            <td><div class="cal-date">TBA</div></td>
+            <td><div class="cal-name">NYPDL December Online<span class="cal-detail">NYPDL event</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-gold">NYPDL</span><span class="badge badge-b">Online</span></div></td>
+            <td><span class="tabroom-link tabroom-link-muted">TBA</span></td>
+          </tr>
+          <tr data-month="TBA" data-location="California">
+            <td><div class="cal-date">TBA</div></td>
+            <td><div class="cal-name">NYPDL February California In Person Invitational<span class="cal-detail">NYPDL event</span></div></td>
+            <td class="cal-location">Benicia, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-gold">NYPDL</span><span class="badge badge-b">California</span></div></td>
+            <td><span class="tabroom-link tabroom-link-muted">TBA</span></td>
+          </tr>
+          <tr data-month="TBA" data-location="Online">
+            <td><div class="cal-date">TBA</div></td>
+            <td><div class="cal-name">NYPDL January Online<span class="cal-detail">NYPDL event</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-gold">NYPDL</span><span class="badge badge-b">Online</span></div></td>
+            <td><span class="tabroom-link tabroom-link-muted">TBA</span></td>
+          </tr>
+          <tr data-month="TBA" data-location="California">
+            <td><div class="cal-date">TBA</div></td>
+            <td><div class="cal-name">NYPDL March California In Person<span class="cal-detail">NYPDL event</span></div></td>
+            <td class="cal-location">Menlo-Atherton, CA</td>
+            <td class="cal-format">In Person</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-gold">NYPDL</span><span class="badge badge-b">California</span></div></td>
+            <td><span class="tabroom-link tabroom-link-muted">TBA</span></td>
+          </tr>
+          <tr data-month="TBA" data-location="Online">
+            <td><div class="cal-date">TBA</div></td>
+            <td><div class="cal-name">NYPDL March Online Invitational<span class="cal-detail">NYPDL event</span></div></td>
+            <td class="cal-location">Online</td>
+            <td class="cal-format">Online</td>
+            <td class="cal-deadline">TBA</td>
+            <td class="cal-notes">Calendar status: TBA.<div class="cal-badges"><span class="badge badge-gold">NYPDL</span><span class="badge badge-b">Online</span></div></td>
+            <td><span class="tabroom-link tabroom-link-muted">TBA</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="calendar-empty" id="calendarEmpty">No tournaments match those filters.</div>
   </div>
 </section>
 
@@ -1705,7 +2117,7 @@
         <p>No experience required. We meet every <strong style="color:rgba(255,255,255,0.75)">[Day]</strong> at <strong style="color:rgba(255,255,255,0.75)">[Time]</strong> in <strong style="color:rgba(255,255,255,0.75)">[Room]</strong>. Come to a meeting.</p>
       </div>
       <div class="join-actions">
-        <a href="https://docs.google.com/spreadsheets/d/1kLUGqF-avBWPHYwEsxfgV16bZPcZI2qrhWRvbVvEdwY/edit?gid=2100567159#gid=2100567159" target = "_blank" class="btn btn-gold">See the schedule</a>
+        <a href="#calendar" class="btn btn-gold">See the calendar</a>
         <a href="mailto:[prospectdebate@gmail.com]" class="btn btn-white">Email us</a>
       </div>
     </div>
@@ -1721,7 +2133,7 @@
       <li><a href="#events">Events</a></li>
       <li><a href="#achievements">Results</a></li>
       <li><a href="#team">Team</a></li>
-      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#calendar">Calendar</a></li>
       <li><a href="history.html">History</a></li>
     </ul>
     <div class="footer-copy">&copy; <span id="yr"></span> Prospect Speech & Debate</div>
@@ -1736,6 +2148,31 @@
   function closeNav() {
     document.getElementById('mobileMenu').classList.remove('open');
   }
+  const calendarRows = Array.from(document.querySelectorAll('#calendarRows tr'));
+  const calendarSearch = document.getElementById('calendarSearch');
+  const calendarMonth = document.getElementById('calendarMonth');
+  const calendarLocation = document.getElementById('calendarLocation');
+  const calendarEmpty = document.getElementById('calendarEmpty');
+  function updateCalendarRows() {
+    if (!calendarRows.length) return;
+    const term = calendarSearch.value.trim().toLowerCase();
+    const selectedMonth = calendarMonth.value;
+    const selectedLocation = calendarLocation.value;
+    let visibleCount = 0;
+    calendarRows.forEach(function(row) {
+      const matchesSearch = !term || row.textContent.toLowerCase().includes(term);
+      const matchesMonth = !selectedMonth || row.dataset.month === selectedMonth;
+      const matchesLocation = !selectedLocation || row.dataset.location === selectedLocation;
+      const isVisible = matchesSearch && matchesMonth && matchesLocation;
+      row.hidden = !isVisible;
+      if (isVisible) visibleCount += 1;
+    });
+    calendarEmpty.classList.toggle('show', visibleCount === 0);
+  }
+  [calendarSearch, calendarMonth, calendarLocation].forEach(function(control) {
+    control.addEventListener('input', updateCalendarRows);
+    control.addEventListener('change', updateCalendarRows);
+  });
   document.addEventListener('click', function(e) {
     const menu = document.getElementById('mobileMenu');
     const toggle = document.querySelector('.nav-toggle');
