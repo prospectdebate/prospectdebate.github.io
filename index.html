@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     :root {
       --blue: #007EC6;
@@ -742,30 +742,125 @@
     .member-events { font-size: 0.72rem; color: var(--muted); }
 
     /* ── CALENDAR ── */
-    #calendar { background: var(--off); }
-    #calendar { scroll-margin-top: 60px; }
+    #calendar {
+      position: relative;
+      overflow: hidden;
+      scroll-margin-top: 60px;
+      background:
+        linear-gradient(180deg, rgba(0,63,102,0.98), rgba(0,42,69,0.98)),
+        var(--blue-deep);
+      color: var(--white);
+    }
+    #calendar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background:
+        linear-gradient(90deg, transparent 0 19%, rgba(255,255,255,0.18) 19.1%, transparent 19.25%),
+        linear-gradient(0deg, transparent 0 64%, rgba(201,168,76,0.38) 64.1%, transparent 64.25%);
+      background-size: 150px 150px, 100% 100%;
+    }
+    #calendar::after {
+      content: "2025-26";
+      position: absolute;
+      right: -0.2em;
+      top: 0.78em;
+      color: rgba(255,255,255,0.045);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(6rem, 18vw, 15rem);
+      font-weight: 700;
+      line-height: 1;
+      pointer-events: none;
+    }
+    #calendar .container-wide {
+      position: relative;
+      z-index: 1;
+    }
+    .calendar-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      color: var(--gold);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .calendar-kicker::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 7px rgba(201,168,76,0.14);
+    }
+    .calendar-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 2.2rem;
+    }
+    .calendar-heading h2 {
+      max-width: 760px;
+      margin-top: 0.8rem;
+      color: var(--white);
+    }
+    .calendar-heading p {
+      max-width: 560px;
+      margin-top: 0.9rem;
+      color: rgba(255,255,255,0.58);
+      font-size: 0.92rem;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+    .calendar-count {
+      min-width: 132px;
+      padding: 1.05rem 1.1rem;
+      border-left: 1px solid rgba(201,168,76,0.34);
+      color: rgba(255,255,255,0.62);
+      text-align: right;
+    }
+    .calendar-count strong {
+      display: block;
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+    .calendar-panel {
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 7px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.99), rgba(248,250,252,0.98));
+      box-shadow: 0 30px 80px rgba(0,18,31,0.34);
+    }
     .calendar-tools {
       display: grid;
       grid-template-columns: minmax(220px, 1fr) 160px 160px;
       gap: 1rem;
       align-items: center;
-      margin-top: 2.6rem;
-      padding-bottom: 1.1rem;
+      padding: 1.15rem;
       border-bottom: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(245,247,250,0.96));
     }
     .calendar-search,
     .calendar-filter {
       width: 100%;
-      min-height: 42px;
+      min-height: 46px;
       border: 1px solid var(--border);
       border-radius: 3px;
       background: var(--white);
       color: var(--text);
       font: inherit;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       outline: none;
     }
-    .calendar-search { padding: 0 0.9rem; }
+    .calendar-search { padding: 0 1rem; }
     .calendar-filter {
       appearance: none;
       padding: 0 2rem 0 0.9rem;
@@ -783,10 +878,15 @@
       border-color: rgba(0,126,198,0.45);
       box-shadow: 0 0 0 3px rgba(0,126,198,0.08);
     }
-    .calendar-table-wrap { overflow-x: auto; }
+    .calendar-table-wrap {
+      overflow-x: auto;
+      background:
+        linear-gradient(90deg, rgba(0,63,102,0.055), transparent 26%, transparent 74%, rgba(201,168,76,0.055)),
+        var(--white);
+    }
     .calendar-table {
       width: 100%;
-      min-width: 880px;
+      min-width: 960px;
       border-collapse: separate;
       border-spacing: 0;
       font-size: 0.82rem;
@@ -798,29 +898,42 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--muted);
-      padding: 1rem 1.1rem;
+      padding: 1.05rem 1.2rem;
       border-bottom: 1px solid var(--border);
-      background: var(--off);
+      background: rgba(245,247,250,0.96);
     }
-    .calendar-table th:first-child { padding-left: 0; }
+    .calendar-table th:first-child { padding-left: 1.2rem; }
     .calendar-table td {
-      padding: 1.2rem 1.1rem;
+      padding: 1.15rem 1.2rem;
       border-bottom: 1px solid var(--border);
       color: var(--text);
       vertical-align: middle;
     }
-    .calendar-table td:first-child { padding-left: 0; }
+    .calendar-table td:first-child { padding-left: 1.2rem; }
     .calendar-table tbody tr:last-child td { border-bottom: none; }
-    .calendar-table tbody tr:hover td { background: rgba(0,126,198,0.03); }
+    .calendar-table tbody tr {
+      background: rgba(255,255,255,0.72);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .calendar-table tbody tr:nth-child(even) { background: rgba(245,247,250,0.7); }
+    .calendar-table tbody tr:hover { background: rgba(232,244,255,0.86); }
+    .calendar-table tbody tr:hover td { border-bottom-color: rgba(0,126,198,0.18); }
     .cal-date {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0.25rem 0.55rem;
+      border-left: 3px solid var(--gold);
+      background: rgba(0,63,102,0.06);
       color: var(--blue-deep);
+      font-size: 0.74rem;
       font-weight: 700;
       white-space: nowrap;
     }
     .cal-name {
-      min-width: 260px;
+      min-width: 280px;
       font-family: 'Playfair Display', serif;
-      font-size: 0.96rem;
+      font-size: 1.02rem;
       font-weight: 700;
       line-height: 1.25;
     }
@@ -830,16 +943,21 @@
       text-decoration: none;
     }
     .cal-title-link {
-      border-bottom: 1px solid rgba(201,168,76,0.45);
+      background-image: linear-gradient(transparent 72%, rgba(201,168,76,0.28) 72%);
+      background-size: 100% 100%;
       transition: color 0.2s, border-color 0.2s;
     }
     .cal-title-link:hover {
-      color: var(--blue);
-      border-color: var(--gold);
+      color: var(--blue-deep);
+      background-image: linear-gradient(transparent 64%, rgba(201,168,76,0.58) 64%);
     }
     .cal-location,
     .cal-deadline { white-space: nowrap; }
-    .cal-deadline { font-weight: 500; }
+    .cal-location { color: #30435b; }
+    .cal-deadline {
+      color: #56677d;
+      font-weight: 600;
+    }
     .cal-notes {
       min-width: 240px;
       max-width: 340px;
@@ -849,9 +967,10 @@
     }
     .cal-note-editor {
       min-height: 38px;
-      padding: 0.55rem 0.65rem;
-      border: 1px solid transparent;
-      border-radius: 3px;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid rgba(229,231,235,0.95);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.68);
       color: var(--text);
       outline: none;
       transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
@@ -864,8 +983,8 @@
       font-style: italic;
     }
     .cal-note-editor:hover {
-      border-color: var(--border);
-      background: rgba(255,255,255,0.55);
+      border-color: rgba(0,126,198,0.25);
+      background: rgba(255,255,255,0.95);
     }
     .cal-note-editor:focus {
       border-color: rgba(0,126,198,0.45);
@@ -948,6 +1067,17 @@
       .photos-grid { grid-template-columns: repeat(2, 1fr); }
       .photo-slot.large { grid-column: span 2; }
       .join-inner { flex-direction: column; align-items: flex-start; }
+      .calendar-heading {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .calendar-count {
+        width: fit-content;
+        border-left: 0;
+        border-top: 1px solid rgba(201,168,76,0.34);
+        padding: 0.8rem 0 0;
+        text-align: left;
+      }
       .calendar-tools { grid-template-columns: 1fr; }
     }
     @media (max-width: 560px) {
@@ -962,6 +1092,12 @@
       .mobile-menu { padding: 1.5rem; }
       .hero-layout { padding: 6rem 1.5rem 2.2rem; }
       .ticker-track span { font-size: 0.62rem; }
+      #calendar::after { top: 1.15em; }
+      .calendar-heading h2 { font-size: 2.25rem; }
+      .calendar-heading p { font-size: 0.86rem; }
+      .calendar-table { min-width: 820px; }
+      .cal-name { min-width: 230px; }
+      .cal-notes { min-width: 220px; }
     }
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; animation: none !important; }
@@ -1728,30 +1864,40 @@
 <!-- ── CALENDAR ── -->
 <section id="calendar" class="section">
   <div class="container-wide">
-    <div class="eyebrow dark">This Season</div>
-    <h2>Parliamentary Tournament Calendar</h2>
-    <div class="calendar-tools" aria-label="Tournament filters">
-      <input class="calendar-search" id="calendarSearch" type="search" placeholder="Search tournament or location" aria-label="Search tournament or location">
-      <select class="calendar-filter" id="calendarMonth" aria-label="Filter by month">
-        <option value="">All months</option>
-        <option>August</option>
-        <option>September</option>
-        <option>October</option>
-        <option>November</option>
-        <option>December</option>
-        <option>January</option>
-        <option>February</option>
-        <option>March</option>
-        <option>April</option>
-        <option>TBA</option>
-      </select>
-      <select class="calendar-filter" id="calendarLocation" aria-label="Filter by location">
-        <option value="">All locations</option>
-        <option value="California">California</option>
-        <option value="Online">Online</option>
-      </select>
+    <div class="calendar-heading">
+      <div>
+        <div class="calendar-kicker">This Season</div>
+        <h2>Parliamentary Tournament Calendar</h2>
+        <p>California and online parliamentary debate opportunities, organized for fast planning and live team notes.</p>
+      </div>
+      <div class="calendar-count" aria-label="35 tournaments">
+        <strong>35</strong>
+        tournaments
+      </div>
     </div>
-    <div class="calendar-table-wrap">
+    <div class="calendar-panel">
+      <div class="calendar-tools" aria-label="Tournament filters">
+        <input class="calendar-search" id="calendarSearch" type="search" placeholder="Search tournament or location" aria-label="Search tournament or location">
+        <select class="calendar-filter" id="calendarMonth" aria-label="Filter by month">
+          <option value="">All months</option>
+          <option>August</option>
+          <option>September</option>
+          <option>October</option>
+          <option>November</option>
+          <option>December</option>
+          <option>January</option>
+          <option>February</option>
+          <option>March</option>
+          <option>April</option>
+          <option>TBA</option>
+        </select>
+        <select class="calendar-filter" id="calendarLocation" aria-label="Filter by location">
+          <option value="">All locations</option>
+          <option value="California">California</option>
+          <option value="Online">Online</option>
+        </select>
+      </div>
+      <div class="calendar-table-wrap">
       <table class="calendar-table" aria-label="Parliamentary debate tournament calendar">
         <thead>
           <tr>
@@ -2010,6 +2156,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
     <div class="calendar-empty" id="calendarEmpty">No tournaments match those filters.</div>
   </div>
