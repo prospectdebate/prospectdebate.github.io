@@ -28,12 +28,23 @@
     });
   }
 
-  /* ── hero parallax + prep clock (single rAF loop) ── */
-  var heroBg = $("heroBg");
+  /* ── scroll-scrubbed hero video + prep clock (single rAF loop) ── */
+  var hero = $("top");
+  var heroVideo = $("heroVideo");
   var heroContent = $("heroContent");
   var clock = $("prepClock");
   var pcTime = $("pcTime");
+  var heroVideoReady = false;
   var ticking = false;
+
+  if (heroVideo && !reduceMotion) {
+    heroVideo.pause();
+    heroVideo.addEventListener("loadedmetadata", function () {
+      heroVideoReady = Number.isFinite(heroVideo.duration) && heroVideo.duration > 0;
+      if (heroVideoReady && heroVideo.currentTime === 0) heroVideo.currentTime = .001;
+      onScroll();
+    });
+  }
 
   function onScroll() {
     if (ticking) return;
@@ -44,12 +55,19 @@
 
       if (nav) nav.classList.toggle("scrolled", y > 40);
 
-      /* hero: bg zooms slowly, content parallaxes up + fades */
-      if (heroBg && heroContent && !reduceMotion && y < vh * 1.4) {
-        var p = Math.min(1, y / vh);
-        heroBg.style.transform = "scale(" + (1 + p * 0.14) + ") translateY(" + p * 4 + "%)";
-        heroContent.style.transform = "translateY(" + (-p * 46) + "px)";
-        heroContent.style.opacity = String(1 - p * 1.15);
+      /* Video time follows the sticky hero's scroll progress exactly. */
+      if (hero && heroContent && !reduceMotion) {
+        var heroRange = Math.max(1, hero.offsetHeight - vh);
+        var p = Math.max(0, Math.min(1, y / heroRange));
+        if (heroVideoReady) {
+          var targetTime = p * heroVideo.duration;
+          if (Math.abs(heroVideo.currentTime - targetTime) > 1 / 60) {
+            heroVideo.currentTime = targetTime;
+          }
+        }
+        var contentP = Math.max(0, Math.min(1, (p - .55) / .35));
+        heroContent.style.transform = "translateY(" + (-contentP * 34) + "px)";
+        heroContent.style.opacity = String(1 - contentP);
       }
 
       /* prep clock: 20:00 -> 00:00 across the full page scroll */
@@ -66,6 +84,7 @@
     });
   }
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
   onScroll();
 
   /* ── word-by-word statement reveal (about page) ── */
