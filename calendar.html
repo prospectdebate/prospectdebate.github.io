@@ -1,13 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="refresh" content="0; url=index.html#calendar" />
-  <title>Calendar | Prospect Speech & Debate</title>
-  <link rel="canonical" href="index.html#calendar" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tournament Calendar — Prospect Parliamentary Debate</title>
+<meta name="description" content="California and online parliamentary debate tournaments for the season, with live editable team notes." />
+<link rel="icon" href="images/panther.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
 </head>
 <body>
-  <p><a href="index.html#calendar">Open the tournament calendar</a></p>
+
+<!-- ── NAV ── -->
+<nav id="nav" aria-label="Primary">
+  <a class="nav-brand" href="index.html">PROSPECT&nbsp;<b>PARLI</b></a>
+  <div class="nav-links">
+    <a href="about.html">The Program</a>
+    <a href="record.html">The Record</a>
+    <a href="calendar.html" aria-current="page">Calendar</a>
+  </div>
+  <a class="nav-cta" href="#join">Join</a>
+  <button class="nav-burger" id="navBurger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="about.html">The Program</a>
+  <a href="record.html">The Record</a>
+  <a href="calendar.html" aria-current="page">Calendar</a>
+  <a href="#join">Join</a>
+</div>
+
+<!-- ── PAGE HERO ── -->
+<header class="page-hero">
+  <div class="inner">
+    <div class="cal-heading">
+      <div>
+        <div class="kicker">This Season</div>
+        <h1>Tournament<br/><span class="gold">calendar.</span></h1>
+        <p class="page-intro">California and online parliamentary opportunities, organized for fast planning. Add live team notes right in the page — they save to your browser.</p>
+      </div>
+      <div class="cal-count"><b id="calCountNum">35</b><span>Tournaments</span></div>
+    </div>
+    <hr class="rule" />
+  </div>
+</header>
+
+<section id="calendar">
+  <div class="wrap-wide tight">
+    <div class="cal-tools" aria-label="Tournament filters">
+      <input id="calendarSearch" type="search" placeholder="SEARCH TOURNAMENT OR LOCATION" aria-label="Search tournament or location" />
+      <select id="calendarMonth" aria-label="Filter by month">
+        <option value="">ALL MONTHS</option>
+        <option>August</option><option>September</option><option>October</option>
+        <option>November</option><option>December</option><option>January</option>
+        <option>February</option><option>March</option><option>April</option><option>TBA</option>
+      </select>
+      <select id="calendarLocation" aria-label="Filter by location">
+        <option value="">ALL LOCATIONS</option>
+        <option value="California">California</option>
+        <option value="Online">Online</option>
+      </select>
+    </div>
+
+    <div class="cal-scroll">
+      <table class="caltab" aria-label="Parliamentary debate tournament calendar">
+        <thead>
+          <tr><th>Date</th><th>Tournament</th><th>Location</th><th>Deadline</th><th>Notes</th></tr>
+        </thead>
+        <tbody id="calendarRows">
+          <tr data-month="August" data-location="Online">
+            <td><div class="c-date">Aug 30–31, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=35413" target="_blank" rel="noopener">Harvard College Debating Union Season Opener</a></td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Harvard College Debating Union Season Opener" data-note-key="harvard-college-debating-union-season-opener"></div></td>
+          </tr>
+          <tr data-month="September" data-location="Online">
+            <td><div class="c-date">Sep 6–28, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=37224" target="_blank" rel="noopener">NYPDL September Online Invitational</a></td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for NYPDL September Online Invitational" data-note-key="nypdl-september-online-invitational"></div></td>
+          </tr>
+          <tr data-month="September" data-location="California">
+            <td><div class="c-date">Sep 13–14, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=36032" target="_blank" rel="noopener">Notre Dame Parli Warmup</a></td>
+            <td class="c-loc">Notre Dame San Jose, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Notre Dame Parli Warmup" data-note-key="notre-dame-parli-warmup"></div></td>
+          </tr>
+          <tr data-month="September" data-location="California">
+            <td><div class="c-date">Sep 20–22, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=33098" target="_blank" rel="noopener">Jack Howe Invitational</a></td>
+            <td class="c-loc">CSU Long Beach, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Jack Howe Invitational" data-note-key="jack-howe-invitational"></div></td>
+          </tr>
+          <tr data-month="September" data-location="California">
+            <td><div class="c-date">Sep 26–28, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/fields.mhtml?tourn_id=33088" target="_blank" rel="noopener">Stephen Stewart</a></td>
+            <td class="c-loc">Milpitas HS, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Stephen Stewart" data-note-key="stephen-stewart"></div></td>
+          </tr>
+          <tr data-month="October" data-location="California">
+            <td><div class="c-date">Oct 4–5, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/circuit/index.mhtml?circuit_id=107" target="_blank" rel="noopener">Cal Parli Invitational</a></td>
+            <td class="c-loc">UC Berkeley, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Cal Parli Invitational" data-note-key="cal-parli-invitational"></div></td>
+          </tr>
+          <tr data-month="October" data-location="Online">
+            <td><div class="c-date">Oct 11–12, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/circuit/index.mhtml?circuit_id=179" target="_blank" rel="noopener">NPDL Fall</a></td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for NPDL Fall" data-note-key="npdl-fall"></div></td>
+          </tr>
+          <tr data-month="October" data-location="California">
+            <td><div class="c-date">Oct 17–18, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/circuit/index.mhtml?circuit_id=107" target="_blank" rel="noopener">IW Invitational</a></td>
+            <td class="c-loc">Washington HS, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for IW Invitational" data-note-key="iw-invitational"></div></td>
+          </tr>
+          <tr data-month="October" data-location="California">
+            <td><div class="c-date">Oct 18–19, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=37233" target="_blank" rel="noopener">Bargain Belt Invitational</a></td>
+            <td class="c-loc">Claremont HS, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Bargain Belt Invitational" data-note-key="bargain-belt-invitational"></div></td>
+          </tr>
+          <tr data-month="October" data-location="California">
+            <td><div class="c-date">Oct 24, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=37257" target="_blank" rel="noopener">Jon Schamber Invitational</a></td>
+            <td class="c-loc">University of the Pacific, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Jon Schamber Invitational" data-note-key="jon-schamber-invitational"></div></td>
+          </tr>
+          <tr data-month="October" data-location="California">
+            <td><div class="c-date">Oct 24–26, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=37257" target="_blank" rel="noopener">Jon Schamber High School Invitational</a></td>
+            <td class="c-loc">Stockton, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Jon Schamber High School Invitational" data-note-key="jon-schamber-high-school-invitational"></div></td>
+          </tr>
+          <tr data-month="November" data-location="California">
+            <td><div class="c-date">Nov 8–9, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=37643" target="_blank" rel="noopener">NYPDL November California</a></td>
+            <td class="c-loc">Menlo-Atherton, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for NYPDL November California" data-note-key="nypdl-november-california"></div></td>
+          </tr>
+          <tr data-month="November" data-location="California">
+            <td><div class="c-date">Nov 15–16, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/circuit/index.mhtml?circuit_id=179" target="_blank" rel="noopener">NPDI</a></td>
+            <td class="c-loc">UC Berkeley, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for NPDI" data-note-key="npdi"></div></td>
+          </tr>
+          <tr data-month="November" data-location="Online">
+            <td><div class="c-date">Nov 15–16, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=36253" target="_blank" rel="noopener">UCLA Invitational</a></td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for UCLA Invitational" data-note-key="ucla-invitational"></div></td>
+          </tr>
+          <tr data-month="November" data-location="Online">
+            <td><div class="c-date">Nov 21–23, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=36551" target="_blank" rel="noopener">John Lewis SVUDL Invitational</a></td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for John Lewis SVUDL Invitational" data-note-key="john-lewis-svudl-invitational"></div></td>
+          </tr>
+          <tr data-month="November" data-location="Online">
+            <td><div class="c-date">Nov 22–23, 2025</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=37985" target="_blank" rel="noopener">NYPDL November Online Invitational</a></td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for NYPDL November Online Invitational" data-note-key="nypdl-november-online-invitational"></div></td>
+          </tr>
+          <tr data-month="December" data-location="California">
+            <td><div class="c-date">Dec 5–7, 2025</div></td>
+            <td class="c-name"><a href="http://tabroom.com/index/tourn/index.mhtml?tourn_id=37298" target="_blank" rel="noopener">La Costa Canyon Winter Classic</a></td>
+            <td class="c-loc">La Costa Canyon HS, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for La Costa Canyon Winter Classic" data-note-key="la-costa-canyon-winter-classic"></div></td>
+          </tr>
+          <tr data-month="January" data-location="California">
+            <td><div class="c-date">Jan 10–11, 2026</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=38067" target="_blank" rel="noopener">Nueva Invitational</a></td>
+            <td class="c-loc">Nueva, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Nueva Invitational" data-note-key="nueva-invitational"></div></td>
+          </tr>
+          <tr data-month="January" data-location="California">
+            <td><div class="c-date">Jan 17–19, 2026</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/past.mhtml?webname=mlk" target="_blank" rel="noopener">James Logan Martin Luther King Jr.</a></td>
+            <td class="c-loc">James Logan HS, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for James Logan Martin Luther King Jr." data-note-key="james-logan-martin-luther-king-jr"></div></td>
+          </tr>
+          <tr data-month="January" data-location="Online">
+            <td><div class="c-date">Jan 31, 2026</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/search.mhtml?search=berkeley" target="_blank" rel="noopener">Berkeley International Parliamentary Debate Invitational</a></td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Berkeley International Parliamentary Debate Invitational" data-note-key="berkeley-international-parliamentary-debate-invitational"></div></td>
+          </tr>
+          <tr data-month="February" data-location="Online">
+            <td><div class="c-date">Feb 7–9, 2026</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/circuit/index.mhtml?circuit_id=179" target="_blank" rel="noopener">Stanford Invitational</a></td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Stanford Invitational" data-note-key="stanford-invitational"></div></td>
+          </tr>
+          <tr data-month="February" data-location="Online">
+            <td><div class="c-date">Feb 14–16, 2026</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/search.mhtml?search=berkeley" target="_blank" rel="noopener">Cal Invitational UC Berkeley</a></td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Cal Invitational UC Berkeley" data-note-key="cal-invitational-uc-berkeley"></div></td>
+          </tr>
+          <tr data-month="February" data-location="California">
+            <td><div class="c-date">Feb 14–15, 2026</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/circuit/index.mhtml?circuit_id=107" target="_blank" rel="noopener">Regent Legacy Cal Lutheran</a></td>
+            <td class="c-loc">Cal Lutheran, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Regent Legacy Cal Lutheran" data-note-key="regent-legacy-cal-lutheran"></div></td>
+          </tr>
+          <tr data-month="February" data-location="California">
+            <td><div class="c-date">Feb 21–22, 2026</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=37110" target="_blank" rel="noopener">Evergreen Invitational</a></td>
+            <td class="c-loc">Evergreen Valley, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Evergreen Invitational" data-note-key="evergreen-invitational"></div></td>
+          </tr>
+          <tr data-month="February" data-location="Online">
+            <td><div class="c-date">Feb 21–22, 2026</div></td>
+            <td class="c-name"><a href="https://www.tabroom.com/index/tourn/index.mhtml?tourn_id=36724" target="_blank" rel="noopener">SVUDL Ryan Mills Memorial Invitational</a></td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for SVUDL Ryan Mills Memorial Invitational" data-note-key="svudl-ryan-mills-memorial-invitational"></div></td>
+          </tr>
+          <tr data-month="TBA" data-location="Online">
+            <td><div class="c-date">TBA</div></td>
+            <td class="c-name">Brown University Parliamentary Debate Tournament</td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Brown University Parliamentary Debate Tournament" data-note-key="brown-university-parliamentary-debate-tournament"></div></td>
+          </tr>
+          <tr data-month="TBA" data-location="California">
+            <td><div class="c-date">TBA</div></td>
+            <td class="c-name">Claremont Wolfpack</td>
+            <td class="c-loc">Claremont HS, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for Claremont Wolfpack" data-note-key="claremont-wolfpack"></div></td>
+          </tr>
+          <tr data-month="TBA" data-location="California">
+            <td><div class="c-date">TBA</div></td>
+            <td class="c-name">El Cerrito Berman</td>
+            <td class="c-loc">El Cerrito HS, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for El Cerrito Berman" data-note-key="el-cerrito-berman"></div></td>
+          </tr>
+          <tr data-month="TBA" data-location="Online">
+            <td><div class="c-date">TBA</div></td>
+            <td class="c-name">NPDL Spring</td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for NPDL Spring" data-note-key="npdl-spring"></div></td>
+          </tr>
+          <tr data-month="TBA" data-location="Online">
+            <td><div class="c-date">TBA</div></td>
+            <td class="c-name">NYPDL Championships</td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for NYPDL Championships" data-note-key="nypdl-championships"></div></td>
+          </tr>
+          <tr data-month="TBA" data-location="Online">
+            <td><div class="c-date">TBA</div></td>
+            <td class="c-name">NYPDL December Online</td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for NYPDL December Online" data-note-key="nypdl-december-online"></div></td>
+          </tr>
+          <tr data-month="TBA" data-location="California">
+            <td><div class="c-date">TBA</div></td>
+            <td class="c-name">NYPDL February California In Person Invitational</td>
+            <td class="c-loc">Benicia, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for NYPDL February California In Person Invitational" data-note-key="nypdl-february-california-in-person-invitational"></div></td>
+          </tr>
+          <tr data-month="TBA" data-location="Online">
+            <td><div class="c-date">TBA</div></td>
+            <td class="c-name">NYPDL January Online</td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for NYPDL January Online" data-note-key="nypdl-january-online"></div></td>
+          </tr>
+          <tr data-month="TBA" data-location="California">
+            <td><div class="c-date">TBA</div></td>
+            <td class="c-name">NYPDL March California In Person</td>
+            <td class="c-loc">Menlo-Atherton, CA</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for NYPDL March California In Person" data-note-key="nypdl-march-california-in-person"></div></td>
+          </tr>
+          <tr data-month="TBA" data-location="Online">
+            <td><div class="c-date">TBA</div></td>
+            <td class="c-name">NYPDL March Online Invitational</td>
+            <td class="c-loc online">Online</td>
+            <td class="c-date">TBA</td>
+            <td class="c-notes"><div class="note-box" contenteditable="true" role="textbox" aria-label="Notes for NYPDL March Online Invitational" data-note-key="nypdl-march-online-invitational"></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cal-empty" id="calendarEmpty">NO TOURNAMENTS MATCH THOSE FILTERS.</div>
+  </div>
+</section>
+
+<!-- ── JOIN (shared CTA) ── -->
+<section class="join" id="join">
+  <div class="wrap">
+    <div class="kicker reveal">Join</div>
+    <h2 class="reveal">Come to <span class="gold">one.</span></h2>
+    <p class="reveal">You don't have to commit to a season to start. Watch a practice round, come to a local tournament, see if it's for you. Twenty minutes is all we're asking.</p>
+    <div class="join-actions reveal">
+      <a class="btn btn-gold" href="mailto:prospectparli@gmail.com?subject=I%27m%20interested%20in%20joining%20Prospect%20Debate">I'm Interested</a>
+      <a class="btn btn-ghost" href="about.html">What Is Parli?</a>
+    </div>
+    <div class="join-meta reveal">Prospect High School · Saratoga, CA · Meetings weekly — bring a friend</div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-brand">PROSPECT PARLIAMENTARY</div>
+  <nav class="foot-links" aria-label="Footer">
+    <a href="about.html">Program</a>
+    <a href="record.html">Record</a>
+    <a href="calendar.html">Calendar</a>
+  </nav>
+  <div>© <span id="yr"></span> — WATCH THE RISE</div>
+</footer>
+
+<div id="prepClock" aria-hidden="true">
+  <div class="pc-label">Prep Time</div>
+  <div class="pc-time" id="pcTime">20:00</div>
+</div>
+
+<script src="assets/site.js"></script>
 </body>
 </html>
