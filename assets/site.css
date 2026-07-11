@@ -183,10 +183,34 @@ nav.scrolled {
 .hero-bg {
   position: absolute; inset: -6% 0;
   background: url("images/panther-hero.jpg") center 38% / cover no-repeat;
-  will-change: transform;
+  will-change: transform, opacity;
+  opacity: 0;
+  animation: heroReveal .9s ease 1.3s forwards;
+}
+@keyframes heroReveal { to { opacity: 1; } }
+
+/* shard assembly overlay — plays once on load, then fades to hand off to .hero-bg */
+.shatter {
+  position: absolute; inset: -6% 0;
+  pointer-events: none;
+  animation: shatterOut .8s ease 2.25s forwards;
+}
+@keyframes shatterOut { to { opacity: 0; visibility: hidden; } }
+.shard {
+  position: absolute; inset: 0;
+  background: url("images/panther-hero.jpg") center 38% / cover no-repeat;
+  transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--rot, 0deg)) scale(var(--s, 1));
+  opacity: 0;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  animation: shardIn 1.15s cubic-bezier(.2, .85, .25, 1) var(--d, 0s) both;
+}
+@keyframes shardIn {
+  60%  { opacity: 1; }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
 }
 @media (max-width: 640px) {
-  .hero-bg { background: url("images/panther-hero.jpg") center 32% / 145% auto no-repeat; }
+  .hero-bg, .shard { background: url("images/panther-hero.jpg") center 32% / 145% auto no-repeat; }
 }
 .hero-sweep {
   position: absolute; inset: 0;
@@ -698,5 +722,7 @@ footer .foot-links a:hover { color: var(--gold-hi); }
   .reveal, .statement .w { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
   .in .speech-bar i { transition: none; }
   .hero-bg, .hero-content { transform: none !important; }
+  .hero-bg { opacity: 1 !important; animation: none !important; }
+  .shatter { display: none !important; }
   .hero-scrollcue, .hero-sub .cursor, .hero-sweep { animation: none; }
 }
