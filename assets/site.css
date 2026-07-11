@@ -175,42 +175,34 @@ nav.scrolled {
 /* ═══════════════════════════ HERO (landing) ═══════════════════════════ */
 .hero {
   position: relative;
-  min-height: 100svh;
+  height: 180svh;
+}
+.hero-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
   overflow: clip;
   display: flex;
   align-items: flex-end;
 }
-.hero-bg {
-  position: absolute; inset: -6% 0;
-  background: url("images/panther-hero.jpg") center 38% / cover no-repeat;
-  will-change: transform, opacity;
-  opacity: 0;
-  animation: heroReveal .9s ease 1.3s forwards;
-}
-@keyframes heroReveal { to { opacity: 1; } }
-
-/* shard assembly overlay — plays once on load, then fades to hand off to .hero-bg */
-.shatter {
-  position: absolute; inset: -6% 0;
-  pointer-events: none;
-  animation: shatterOut .8s ease 2.25s forwards;
-}
-@keyframes shatterOut { to { opacity: 0; visibility: hidden; } }
-.shard {
+.hero-art {
   position: absolute; inset: 0;
-  background: url("images/panther-hero.jpg") center 38% / cover no-repeat;
-  transform: translate(var(--tx, 0), var(--ty, 0)) rotate(var(--rot, 0deg)) scale(var(--s, 1));
-  opacity: 0;
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  animation: shardIn 1.15s cubic-bezier(.2, .85, .25, 1) var(--d, 0s) both;
+  background: var(--ink);
 }
-@keyframes shardIn {
-  60%  { opacity: 1; }
-  100% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
+.hero-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
 }
 @media (max-width: 640px) {
-  .hero-bg, .shard { background: url("images/panther-hero.jpg") center 32% / 145% auto no-repeat; }
+  .hero-video {
+    inset: 42% auto auto 50%;
+    width: 145%; height: auto;
+    max-width: none;
+    transform: translate(-50%, -50%);
+  }
 }
 .hero-sweep {
   position: absolute; inset: 0;
@@ -721,8 +713,9 @@ footer .foot-links a:hover { color: var(--gold-hi); }
   html { scroll-behavior: auto; }
   .reveal, .statement .w { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
   .in .speech-bar i { transition: none; }
-  .hero-bg, .hero-content { transform: none !important; }
-  .hero-bg { opacity: 1 !important; animation: none !important; }
-  .shatter { display: none !important; }
+  .hero { height: 100svh; }
+  .hero-art, .hero-content { transform: none !important; }
+  .hero-video { display: none !important; }
+  .hero-art { background: var(--ink) url("video/panther-shards-poster.jpg") center / cover no-repeat; }
   .hero-scrollcue, .hero-sub .cursor, .hero-sweep { animation: none; }
 }
