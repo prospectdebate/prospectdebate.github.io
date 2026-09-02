@@ -234,8 +234,8 @@ landing page as a pure visual moment. Chosen structure: **4 grouped pages**.
 ### Files now
 - **`index.html`** — landing: static panther hero with a conventional headline,
   description, and two calls to action + 2 `.portal-card` entry cards (Program /
-  Calendar) + shared Join CTA + footer. No canvas, video, shard effect, parallax,
-  or ambient hero animation.
+  Calendar) using existing team photography + shared Join CTA + footer. No
+  canvas, video, shard effect, parallax, or ambient hero animation.
 - **`about.html`** — "The Program": page-hero + Rebuild statement (word-by-word
   reveal) + What You Gain (6 cards) + The Format (speech-order bars) + The Room
   (6 team photos) + Join CTA + footer.
