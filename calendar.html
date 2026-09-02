@@ -15,20 +15,20 @@
 
 <!-- ── NAV ── -->
 <nav id="nav" aria-label="Primary">
-  <a class="nav-brand" href="index.html">PROSPECT&nbsp;<b>PARLI</b></a>
+  <a class="nav-brand" href="index.html" aria-label="Prospect Debate home">Prospect <span>Debate</span></a>
   <div class="nav-links">
-    <a href="about.html">The Program</a>
+    <a href="about.html">Program</a>
     <a href="calendar.html" aria-current="page">Calendar</a>
+    <a class="nav-cta" href="#join">Join the team</a>
   </div>
-  <a class="nav-cta" href="#join">Join</a>
   <button class="nav-burger" id="navBurger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="about.html">The Program</a>
+<div class="mobile-menu" id="mobileMenu" hidden>
+  <a href="about.html">Program</a>
   <a href="calendar.html" aria-current="page">Calendar</a>
-  <a href="#join">Join</a>
+  <a class="mobile-menu-cta" href="#join">Join the team</a>
 </div>
 
 <!-- ── PAGE HERO ── -->
@@ -343,11 +343,6 @@
   </nav>
   <div>© <span id="yr"></span> Prospect Parliamentary Debate</div>
 </footer>
-
-<div id="prepClock" aria-hidden="true">
-  <div class="pc-label">Prep Time</div>
-  <div class="pc-time" id="pcTime">20:00</div>
-</div>
 
 <script src="assets/site.js"></script>
 </body>

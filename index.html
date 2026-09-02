@@ -15,38 +15,34 @@
 
 <!-- ── NAV ── -->
 <nav id="nav" aria-label="Primary">
-  <a class="nav-brand" href="index.html">PROSPECT&nbsp;<b>PARLI</b></a>
+  <a class="nav-brand" href="index.html" aria-label="Prospect Debate home">Prospect <span>Debate</span></a>
   <div class="nav-links">
-    <a href="about.html">The Program</a>
+    <a href="about.html">Program</a>
     <a href="calendar.html">Calendar</a>
+    <a class="nav-cta" href="#join">Join the team</a>
   </div>
-  <a class="nav-cta" href="#join">Join</a>
   <button class="nav-burger" id="navBurger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="about.html">The Program</a>
+<div class="mobile-menu" id="mobileMenu" hidden>
+  <a href="about.html">Program</a>
   <a href="calendar.html">Calendar</a>
-  <a href="#join">Join</a>
+  <a class="mobile-menu-cta" href="#join">Join the team</a>
 </div>
 
 <!-- ── HERO ── -->
 <header class="hero" id="top">
-  <div class="hero-stage">
-    <div class="hero-art" id="heroArt">
-      <video class="hero-video" id="heroVideo" muted playsinline preload="auto" poster="assets/video/panther-shards-start.jpg" aria-hidden="true">
-        <source src="assets/video/panther-shards.mp4" type="video/mp4" />
-      </video>
+  <div class="hero-bg"></div>
+  <div class="hero-shade"></div>
+  <div class="hero-content">
+    <div class="hero-kicker">Prospect High School · Saratoga, California</div>
+    <h1>Prospect Parliamentary Debate</h1>
+    <p class="hero-sub">A student-led debate team built around clear thinking, confident speaking, and strong competition. New members are always welcome.</p>
+    <div class="hero-actions">
+      <a class="hero-button hero-button-primary" href="#join">Join the team</a>
+      <a class="hero-button hero-button-secondary" href="about.html">Learn about the program</a>
     </div>
-    <div class="hero-sweep"></div>
-    <div class="hero-shade"></div>
-    <div class="hero-content" id="heroContent">
-      <div class="hero-kicker">Prospect High School · Saratoga, CA</div>
-      <h1>Parliamentary <span class="gold">Debate.</span></h1>
-      <p class="hero-sub">The parliamentary debate team at Prospect High School.<span class="cursor"></span></p>
-    </div>
-    <div class="hero-scrollcue">Scroll ▾</div>
   </div>
 </header>
 
@@ -99,11 +95,6 @@
   </nav>
   <div>© <span id="yr"></span> Prospect Parliamentary Debate</div>
 </footer>
-
-<div id="prepClock" aria-hidden="true">
-  <div class="pc-label">Prep Time</div>
-  <div class="pc-time" id="pcTime">20:00</div>
-</div>
 
 <script src="assets/site.js"></script>
 </body>

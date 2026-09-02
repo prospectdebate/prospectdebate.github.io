@@ -7,85 +7,37 @@
   var yr = $("yr");
   if (yr) yr.textContent = new Date().getFullYear();
 
-  /* ── nav scrolled state ── */
-  var nav = $("nav");
-
   /* ── mobile menu ── */
   var burger = $("navBurger");
   var mobileMenu = $("mobileMenu");
   if (burger && mobileMenu) {
     var closeMenu = function () {
       burger.setAttribute("aria-expanded", "false");
-      mobileMenu.classList.remove("open");
+      burger.setAttribute("aria-label", "Open menu");
+      mobileMenu.hidden = true;
     };
     burger.addEventListener("click", function () {
       var open = burger.getAttribute("aria-expanded") === "true";
       burger.setAttribute("aria-expanded", String(!open));
-      mobileMenu.classList.toggle("open", !open);
+      burger.setAttribute("aria-label", open ? "Open menu" : "Close menu");
+      mobileMenu.hidden = open;
     });
     mobileMenu.querySelectorAll("a").forEach(function (a) {
       a.addEventListener("click", closeMenu);
     });
-  }
-
-  /* ── scroll-scrubbed hero video + prep clock (single rAF loop) ── */
-  var hero = $("top");
-  var heroVideo = $("heroVideo");
-  var heroContent = $("heroContent");
-  var clock = $("prepClock");
-  var pcTime = $("pcTime");
-  var heroVideoReady = false;
-  var ticking = false;
-
-  if (heroVideo && !reduceMotion) {
-    heroVideo.pause();
-    heroVideo.addEventListener("loadedmetadata", function () {
-      heroVideoReady = Number.isFinite(heroVideo.duration) && heroVideo.duration > 0;
-      if (heroVideoReady && heroVideo.currentTime === 0) heroVideo.currentTime = .001;
-      onScroll();
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeMenu();
+    });
+    document.addEventListener("click", function (event) {
+      if (burger.getAttribute("aria-expanded") === "true" &&
+          !burger.contains(event.target) && !mobileMenu.contains(event.target)) {
+        closeMenu();
+      }
+    });
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 720) closeMenu();
     });
   }
-
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(function () {
-      var y = window.scrollY || 0;
-      var vh = window.innerHeight;
-
-      if (nav) nav.classList.toggle("scrolled", y > 40);
-
-      /* Video time follows the sticky hero's scroll progress exactly. */
-      if (hero && heroContent && !reduceMotion) {
-        var heroRange = Math.max(1, hero.offsetHeight - vh);
-        var p = Math.max(0, Math.min(1, y / heroRange));
-        if (heroVideoReady) {
-          var targetTime = p * heroVideo.duration;
-          if (Math.abs(heroVideo.currentTime - targetTime) > 1 / 60) {
-            heroVideo.currentTime = targetTime;
-          }
-        }
-        var contentP = Math.max(0, Math.min(1, (p - .55) / .35));
-        heroContent.style.transform = "translateY(" + (-contentP * 34) + "px)";
-        heroContent.style.opacity = String(1 - contentP);
-      }
-
-      /* prep clock: 20:00 -> 00:00 across the full page scroll */
-      if (clock && pcTime) {
-        var max = document.documentElement.scrollHeight - vh;
-        var total = max > 0 ? Math.min(1, y / max) : 0;
-        var secs = Math.round(1200 * (1 - total));
-        var m = Math.floor(secs / 60), s = secs % 60;
-        pcTime.textContent = (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
-        clock.classList.toggle("on", y > vh * 0.4 && total < 0.985);
-      }
-
-      ticking = false;
-    });
-  }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll, { passive: true });
-  onScroll();
 
   /* ── word-by-word statement reveal (about page) ── */
   var statement = $("statement");
