@@ -232,13 +232,15 @@ The user asked to split the one-page site into multiple pages, keeping the
 landing page as a pure visual moment. Chosen structure: **4 grouped pages**.
 
 ### Files now
-- **`index.html`** — landing: panther hero + `.hero-sweep` ambient light
-  animation + 3 `.portal-card` entry cards (Program / Record / Calendar) +
-  shared Join CTA + footer. No heavy content.
+- **`index.html`** — landing: static panther hero with a conventional headline,
+  description, and two calls to action + 2 `.portal-card` entry cards (Program /
+  Calendar) + shared Join CTA + footer. No canvas, video, shard effect, parallax,
+  or ambient hero animation.
 - **`about.html`** — "The Program": page-hero + Rebuild statement (word-by-word
   reveal) + What You Gain (6 cards) + The Format (speech-order bars) + The Room
   (6 team photos) + Join CTA + footer.
-- **`record.html`** — "The Record": page-hero + 4 stat tiles + full achievements
+- **`record.html`** — "The Record": currently shelved from primary navigation,
+  but still available directly; page-hero + 4 stat tiles + full achievements
   timeline (8 year-groups, 32 rows, ported verbatim) + Join CTA + footer.
 - **`calendar.html`** — "The Calendar": page-hero (with the 35-count) + filters
   + 35-row table + editable localStorage notes + Join CTA + footer. (This
@@ -246,33 +248,33 @@ landing page as a pure visual moment. Chosen structure: **4 grouped pages**.
 - **`history.html`** — now a redirect to `record.html` (was a stale duplicate
   of the achievements; meta-refresh + `location.replace`).
 - **`assets/site.css`** — ALL shared styles (extracted from the old inline
-  `<style>`), plus new `.page-hero`, `.portal-*`, `.hero-sweep`, nav
-  `[aria-current]` active state, and `.foot-links`. NOTE: background-image URLs
-  in this file are relative to `assets/`, so they read `url("images/...")`
-  which resolves to `assets/images/...` — do NOT change these to
-  `assets/images/...` or they'll break.
+  `<style>`), including the simple fixed site navigation, `.page-hero`,
+  `.portal-*`, nav `[aria-current]` active state, and `.foot-links`. NOTE:
+  background-image URLs in this file are relative to `assets/`, so they read
+  `url("images/...")` which resolves to `assets/images/...` — do NOT change
+  these to `assets/images/...` or they'll break.
 - **`assets/site.js`** — ALL shared JS, refactored with **feature-detection**
   (every block guards on element existence) so the one file works on every
-  page: year, nav-scrolled, mobile menu, hero parallax + prep clock (guarded),
-  statement reveal (about only), `.reveal` IntersectionObserver, calendar
-  filters + notes (calendar only).
+  page: year, accessible mobile menu, statement reveal (about only), `.reveal`
+  IntersectionObserver, calendar filters + notes (calendar only).
 
 ### Shared partials (hand-duplicated in each HTML, since no build step)
 - Nav (with `aria-current="page"` on the active link) + mobile menu
 - Join CTA `<section class="join" id="join">` (headline/copy varies slightly
   per page; "Join" nav link points to `#join` on every page)
 - Footer with `.foot-links` cross-page nav
-- `#prepClock` widget + `<script src="assets/site.js">`
+- `<script src="assets/site.js">`
 
-### Verified (desktop 1280×800 + mobile 375×812, local server :8199)
-- All 4 page heros render correctly on fresh load; nav active-state correct per
-  page; brand/burger/mobile-menu links all point to the right pages.
+### Verified (desktop 1280×720 + mobile 390×844)
+- The landing hero and shared navigation render without horizontal overflow.
+  The mobile menu opens, closes, updates its accessible label/state, and closes
+  on Escape. Active navigation state is correct on Program, Calendar, and the
+  directly accessible Record page.
 - about: statement + 6 gain cards + 6 room photos present. record: 8 years / 4
   stats / 32 rows. calendar: 35 rows, month filter (Oct→6) + count + notes
   wired. history → redirects to record.
-- All assets 200 over HTTP (site.css, site.js, panther-hero.jpg, team photos).
-  No console errors. "Broken image" reports during checks were just
-  `loading="lazy"` below-fold images (false positives; curl confirmed 200).
+- No browser console errors. The old hero sweep, cursor, scroll cue, parallax,
+  global film grain, and floating prep timer have been removed.
 - KNOWN TOOL QUIRK persists: the preview browser shows blank/stale frames after
   JS `scrollTo` jumps — trust `elementFromPoint`/computed-style checks and
   fresh-load screenshots over a single mid-page screenshot.

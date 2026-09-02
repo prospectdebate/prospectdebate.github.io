@@ -7,66 +7,37 @@
   var yr = $("yr");
   if (yr) yr.textContent = new Date().getFullYear();
 
-  /* ── nav scrolled state ── */
-  var nav = $("nav");
-
   /* ── mobile menu ── */
   var burger = $("navBurger");
   var mobileMenu = $("mobileMenu");
   if (burger && mobileMenu) {
     var closeMenu = function () {
       burger.setAttribute("aria-expanded", "false");
-      mobileMenu.classList.remove("open");
+      burger.setAttribute("aria-label", "Open menu");
+      mobileMenu.hidden = true;
     };
     burger.addEventListener("click", function () {
       var open = burger.getAttribute("aria-expanded") === "true";
       burger.setAttribute("aria-expanded", String(!open));
-      mobileMenu.classList.toggle("open", !open);
+      burger.setAttribute("aria-label", open ? "Open menu" : "Close menu");
+      mobileMenu.hidden = open;
     });
     mobileMenu.querySelectorAll("a").forEach(function (a) {
       a.addEventListener("click", closeMenu);
     });
-  }
-
-  /* ── hero parallax + prep clock (single rAF loop) ── */
-  var heroBg = $("heroBg");
-  var heroContent = $("heroContent");
-  var clock = $("prepClock");
-  var pcTime = $("pcTime");
-  var ticking = false;
-
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(function () {
-      var y = window.scrollY || 0;
-      var vh = window.innerHeight;
-
-      if (nav) nav.classList.toggle("scrolled", y > 40);
-
-      /* hero: bg zooms slowly, content parallaxes up + fades */
-      if (heroBg && heroContent && !reduceMotion && y < vh * 1.4) {
-        var p = Math.min(1, y / vh);
-        heroBg.style.transform = "scale(" + (1 + p * 0.14) + ") translateY(" + p * 4 + "%)";
-        heroContent.style.transform = "translateY(" + (-p * 46) + "px)";
-        heroContent.style.opacity = String(1 - p * 1.15);
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeMenu();
+    });
+    document.addEventListener("click", function (event) {
+      if (burger.getAttribute("aria-expanded") === "true" &&
+          !burger.contains(event.target) && !mobileMenu.contains(event.target)) {
+        closeMenu();
       }
-
-      /* prep clock: 20:00 -> 00:00 across the full page scroll */
-      if (clock && pcTime) {
-        var max = document.documentElement.scrollHeight - vh;
-        var total = max > 0 ? Math.min(1, y / max) : 0;
-        var secs = Math.round(1200 * (1 - total));
-        var m = Math.floor(secs / 60), s = secs % 60;
-        pcTime.textContent = (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
-        clock.classList.toggle("on", y > vh * 0.4 && total < 0.985);
-      }
-
-      ticking = false;
+    });
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 720) closeMenu();
     });
   }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
 
   /* ── word-by-word statement reveal (about page) ── */
   var statement = $("statement");
